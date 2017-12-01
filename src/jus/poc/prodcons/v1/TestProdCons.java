@@ -37,4 +37,6 @@ public class TestProdCons extends Simulateur{
 		
 	}
 
+	public static void main(String[] args){new TestProdCons(new Observateur()).start();}
+	
 }
