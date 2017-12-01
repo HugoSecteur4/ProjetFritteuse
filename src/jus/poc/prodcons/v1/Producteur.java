@@ -1,4 +1,9 @@
-package jus.poc.prodcons;
+package jus.poc.prodcons.v1;
+
+import jus.poc.prodcons.Acteur;
+import jus.poc.prodcons.ControlException;
+import jus.poc.prodcons.Observateur;
+import jus.poc.prodcons._Producteur;
 
 public class Producteur extends Acteur implements _Producteur{
 

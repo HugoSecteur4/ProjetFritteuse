@@ -1,4 +1,7 @@
-package jus.poc.prodcons;
+package jus.poc.prodcons.v1;
+
+import jus.poc.prodcons.Observateur;
+import jus.poc.prodcons.Simulateur;
 
 public class TestProdCons extends Simulateur{
 
