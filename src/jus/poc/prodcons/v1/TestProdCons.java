@@ -6,9 +6,7 @@ import jus.poc.prodcons.Simulateur;
 public class TestProdCons extends Simulateur{
 
 	public TestProdCons(Observateur observateur) {
-		super(observateur);
-		// TODO Auto-generated constructor stub
-	}
+		super(observateur);	}
 
 	@Override
 	protected void run() throws Exception {
