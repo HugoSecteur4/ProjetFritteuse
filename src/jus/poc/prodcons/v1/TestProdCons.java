@@ -6,6 +6,7 @@ import jus.poc.prodcons.Simulateur;
 public class TestProdCons extends Simulateur{
 
 	protected <type> option;
+	
 	/**
 	* Retreave the parameters of the application.
 	* @param file the final name of the file containing the options.
@@ -33,10 +34,7 @@ public class TestProdCons extends Simulateur{
 
 	@Override
 	protected void run() throws Exception {
-		// TODO Auto-generated method stub
 		
 	}
 
-	public static void main(String[] args){new TestProdCons(new Observateur()).start();}
-	
 }
