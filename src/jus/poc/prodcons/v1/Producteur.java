@@ -7,10 +7,15 @@ import jus.poc.prodcons._Producteur;
 
 public class Producteur extends Acteur implements _Producteur{
 
+	protected int ID_Producteur;
+	
+	protected int nb_Prod = 0;
+	
 	protected Producteur(int type, Observateur observateur, int moyenneTempsDeTraitement,
 			int deviationTempsDeTraitement) throws ControlException {
 		super(type, observateur, moyenneTempsDeTraitement, deviationTempsDeTraitement);
-		// TODO Auto-generated constructor stub
+		this.ID_Producteur = nb_Prod;
+		nb_Prod ++;
 	}
 
 	@Override
@@ -24,5 +29,8 @@ public class Producteur extends Acteur implements _Producteur{
 		
 	}
 	
+	public String toString(){
+		return "Je suis le producteur" + ID_Producteur;
+	}
 	
 }
