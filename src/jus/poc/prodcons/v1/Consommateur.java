@@ -7,15 +7,15 @@ import jus.poc.prodcons._Consommateur;
 
 public class Consommateur extends Acteur implements _Consommateur {
 	
-	protected int ID_Conso;
-	
-	protected int nb_Conso = 0;
+//	protected int ID_Conso;
+//	
+//	protected int nb_Conso = 0;
 	
 	protected Consommateur(int type, Observateur observateur, int moyenneTempsDeTraitement,
 			int deviationTempsDeTraitement) throws ControlException {
 		super(type, observateur, moyenneTempsDeTraitement, deviationTempsDeTraitement);
-		this.ID_Conso = nb_Conso;
-		nb_Conso ++;
+//		this.ID_Conso = nb_Conso;
+//		nb_Conso ++;
 	}
 
 	@Override
@@ -30,6 +30,7 @@ public class Consommateur extends Acteur implements _Consommateur {
 	}
 	
 	public String toString(){
-		return "Je suis le consommateur" + ID_Conso;
+//		return "Je suis le consommateur" + ID_Producteur;
+		return "Je suis le consommateur" + identification();
 	}
 }
