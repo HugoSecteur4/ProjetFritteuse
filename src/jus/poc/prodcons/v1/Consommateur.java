@@ -8,9 +8,6 @@ import jus.poc.prodcons._Consommateur;
 
 public class Consommateur extends Acteur implements _Consommateur {
 	
-//	protected int ID_Conso;
-//	
-//	protected int nb_Conso = 0;
 	
 	private Aleatoire alea;
 	
@@ -18,8 +15,6 @@ public class Consommateur extends Acteur implements _Consommateur {
 	protected Consommateur(int type, Observateur observateur, int moyenneTempsDeTraitement,
 			int deviationTempsDeTraitement) throws ControlException {
 		super(type, observateur, moyenneTempsDeTraitement, deviationTempsDeTraitement);
-//		this.ID_Conso = nb_Conso;
-//		nb_Conso ++;
 		alea = new Aleatoire(moyenneTempsDeTraitement, deviationTempsDeTraitement);
 	}
 
@@ -35,7 +30,6 @@ public class Consommateur extends Acteur implements _Consommateur {
 	}
 	
 	public String toString(){
-//		return "Je suis le consommateur" + ID_Producteur;
 		return "Je suis le consommateur" + identification();
 	}
 }
