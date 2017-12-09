@@ -11,9 +11,9 @@ public class Producteur extends Acteur implements _Producteur{
 //	
 //	protected int nb_Prod = 0;
 	
-	protected Producteur(int type, Observateur observateur, int moyenneTempsDeTraitement,
+	protected Producteur(Observateur observateur, int moyenneTempsDeTraitement,
 			int deviationTempsDeTraitement) throws ControlException {
-		super(type, observateur, moyenneTempsDeTraitement, deviationTempsDeTraitement);
+		super(Acteur.typeProducteur, observateur, moyenneTempsDeTraitement, deviationTempsDeTraitement);
 //		this.ID_Producteur = nb_Prod;
 //		nb_Prod ++;
 	}
@@ -26,7 +26,7 @@ public class Producteur extends Acteur implements _Producteur{
 	
 	public void run()
 	{
-		
+	
 	}
 	
 	public String toString(){

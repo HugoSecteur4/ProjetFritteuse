@@ -8,6 +8,7 @@ import java.util.Properties;
 import jus.poc.prodcons.Observateur;
 import jus.poc.prodcons.Simulateur;
 
+
 public class TestProdCons extends Simulateur{
 
 	private int nbProd = 0;
@@ -217,6 +218,8 @@ public class TestProdCons extends Simulateur{
 	protected void run() throws Exception {
 		// TODO Auto-generated method stub
 		this.init("../options/option.xml");
+		Producteur test = new Producteur(observateur, tempsMoyenProduction,deviationTempsMoyenProduction);
+		System.out.println(test.toString());
 		System.out.println(this.nbCons);
 		
 	}
