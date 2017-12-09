@@ -219,8 +219,12 @@ public class TestProdCons extends Simulateur{
 		// TODO Auto-generated method stub
 		this.init("../options/option.xml");
 		System.out.println(this.nbCons);
-
+		Producteur p1= new Producteur( Acteur.typeProducteur, observateur, deviationNombreMoyenDeProduction, deviationNombreMoyenDeProduction);
+		p1.toString();
 		
+	}
+	public static void main (String[] args){
+		new TestProdCons(new Observateur()).start();
 	}
 
 }
