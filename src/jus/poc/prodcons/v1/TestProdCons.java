@@ -13,7 +13,7 @@ public class TestProdCons extends Simulateur{
 
 	private int nbProd = 0;
 	private int nbCons = 0;
-	private static int nbBuffer = 0;
+	private int nbBuffer = 0;
 	private int tempsMoyenProduction = 0;
 	private int deviationTempsMoyenProduction = 0;
 	private int tempsMoyenConsommation = 0;
@@ -22,9 +22,6 @@ public class TestProdCons extends Simulateur{
 	private int deviationNombreMoyenDeProduction = 0;
 	private int nombreMoyenNbExemplaire = 0;
 	private int deviationNombreMoyenNbExemplaire = 0;
-	
-	public static ProdCons buffer = new ProdCons(nbBuffer);
-	
 	public int getNbProd() {
 		return nbProd;
 	}
