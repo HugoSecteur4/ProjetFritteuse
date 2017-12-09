@@ -19,8 +19,10 @@ public class Producteur extends Acteur implements _Producteur{
 		return 0;
 	}
 	
-	public void start()
+	public void run()
 	{
 		
 	}
+	
+	
 }

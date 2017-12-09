@@ -106,7 +106,6 @@ public class TestProdCons extends Simulateur{
 	Properties option = new Properties("jus/poc/prodcons/options/"+file);
 	// Integer.parseInt(option.getProperty("nbProd"));
 	
-	
 	}
 	
 	public TestProdCons(Observateur observateur) {

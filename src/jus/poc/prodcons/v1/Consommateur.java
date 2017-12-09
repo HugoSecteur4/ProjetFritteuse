@@ -19,7 +19,7 @@ public class Consommateur extends Acteur implements _Consommateur {
 		return 0;
 	}
 
-	public void start()
+	public void run()
 	{
 		
 	}

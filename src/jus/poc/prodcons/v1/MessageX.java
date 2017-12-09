@@ -40,6 +40,10 @@ public class MessageX implements Message{
 	public void setMessage(String message) {
 		this.message = message;
 	}
+	
+	public String toString(){ 
+		return "Message " + numero_message + "du producteur" + p + " : " + message;
+	}
 
 
 	
