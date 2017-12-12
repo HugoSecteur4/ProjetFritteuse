@@ -24,6 +24,7 @@ public class TestProdCons extends Simulateur{
 	private int deviationNombreMoyenNbExemplaire = 0;
 	
 	public static ProdCons buffer;
+	
 	public int getNbProd() {
 		return nbProd;
 	}
@@ -221,7 +222,7 @@ public class TestProdCons extends Simulateur{
 		// TODO Auto-generated method stub
 		this.init("../options/option.xml");
 		buffer = new ProdCons(nbBuffer);
-		Producteur test = new Producteur(observateur, tempsMoyenProduction,deviationTempsMoyenProduction);
+		Producteur test = new Producteur(observateur, tempsMoyenProduction, deviationTempsMoyenProduction);
 		System.out.println(test.toString());
 		System.out.println(this.nbCons);
 		
