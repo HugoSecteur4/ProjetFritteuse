@@ -23,12 +23,6 @@ public class TestProdCons extends Simulateur{
 	private int nombreMoyenNbExemplaire = 0;
 	private int deviationNombreMoyenNbExemplaire = 0;
 	
-<<<<<<< HEAD
-
-=======
-	public static ProdCons buffer;
->>>>>>> 8c29973b2c5329940483b783a63024b141ea8938
-	
 	public int getNbProd() {
 		return nbProd;
 	}
@@ -150,7 +144,7 @@ public class TestProdCons extends Simulateur{
 
 
 	public void setDeviationNombreMoyenNbExemplaire(int deviationNombreMoyenNbExemplaire) {
-		this.deviationNombreMoyenNbExemplaire = deviationNombreMoyenNbExemplaire;
+		this.deviationNombreMoyenNbExemplaire  = deviationNombreMoyenNbExemplaire;
 	}
 
 

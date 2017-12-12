@@ -1,5 +1,3 @@
-package src.jus.poc.prodcons.v1;
-
 import jus.poc.prodcons.Acteur;
 import jus.poc.prodcons.Aleatoire;
 import jus.poc.prodcons.ControlException;
@@ -38,7 +36,7 @@ public class Consommateur extends Acteur implements _Consommateur {
 		}
 		// Si on récupère un message : 
 		try {
-			TestProdCons.buffer.get(this);
+//			TestProdCons.buffer.get(this);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		} catch (Exception e) {
