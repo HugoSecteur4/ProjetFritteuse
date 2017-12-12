@@ -12,9 +12,13 @@ public class MessageX implements Message{
 	public MessageX(String message, Producteur p) {
 		super();
 		this.message = message;
-		this.numero_message = num_message;
+		
+		this.numero_message = num_message++;
+		
 		this.p = p;
-		num_message = num_message +1;
+		
+		//num_message = num_message +1;
+
 	}
 	
 	public int getNumero_message() {
@@ -42,7 +46,8 @@ public class MessageX implements Message{
 	}
 	
 	public String toString(){ 
-		return "Message " + numero_message + " du producteur " + p.identification() + " : " + message;
+		//return "Message " + numero_message + " du producteur " + p.identification() + " : " + message;
+		return "id : " + this.numero_message + " msg : " + message;
 	}
 
 

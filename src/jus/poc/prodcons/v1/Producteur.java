@@ -39,6 +39,10 @@ public class Producteur extends Acteur implements _Producteur{
 	{	
 	
 		for(int i=0;i<NbMessageAProduire;i++){
+			if (Math.random()<=0.5) {
+				yield();
+				System.out.println("COMMUTATION");
+			}
 			try {
 				Thread.sleep(TempsProduction.next());
 			} catch (InterruptedException e) {
@@ -47,9 +51,24 @@ public class Producteur extends Acteur implements _Producteur{
 			}
 			
 			try {
-				this.Buff.put(this, new MessageX("test"+identification(), this) );
+				if (Math.random()<=1) {
+					yield();
+					System.out.println("COMMUTATION");
+				}
+				MessageX m;
+				synchronized(Buff) {
+					m = new MessageX("Bonjour, je suis le producteur "+this.identification()+ " ceci est mon message n°"+this.nombreDeMess+1, this);
+				}
+				this.Buff.put(this,m);
+				if (Math.random()<=0.5) {
+					yield();
+					System.out.println("COMMUTATION");
+				}
 				nombreDeMess ++;
-				this.Buff.toString();
+				if (Math.random()<=0.5) {
+					yield();
+					System.out.println("COMMUTATION");
+				}
 
 
 			} catch (Exception e) {
@@ -57,9 +76,21 @@ public class Producteur extends Acteur implements _Producteur{
 				e.printStackTrace();
 			}
 
-			
+			if (Math.random()<=0.5) {
+				yield();
+				System.out.println("COMMUTATION");
+			}
 		}
-		System.out.println(toString()+" a fini sa production XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+		if (Math.random()<=0.5) {
+			yield();
+			System.out.println("COMMUTATION");
+		}
+		this.Buff.incrNb_prodcts_terminated();
+		if (Math.random()<=0.5) {
+			yield();
+			System.out.println("COMMUTATION");
+		}
+		//System.out.println(toString()+" a fini sa production XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
 	
 	}
 	

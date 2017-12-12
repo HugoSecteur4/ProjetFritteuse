@@ -219,7 +219,7 @@ public class TestProdCons extends Simulateur{
 	protected void run() throws Exception {
 		// TODO Auto-generated method stub
 		this.init("../options/option.xml");
-		ProdCons buffer = new ProdCons(nbBuffer);
+		ProdCons buffer = new ProdCons(nbBuffer, this.nbProd);
 		
 		for (int i =0; i<nbProd;i++){
 			(new Producteur(observateur,buffer, tempsMoyenProduction, deviationTempsMoyenProduction, nombreMoyenDeProduction, deviationNombreMoyenDeProduction)).start();
@@ -227,7 +227,7 @@ public class TestProdCons extends Simulateur{
 		
 		for (int i =0; i<nbCons;i++){
 			Consommateur consommateur = new Consommateur(observateur,buffer, tempsMoyenConsommation, deviationTempsMoyenConsommation);
-			consommateur.setDaemon(true);
+			//consommateur.setDaemon(true);
 			consommateur.start();
 		}
 

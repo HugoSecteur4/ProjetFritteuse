@@ -11,23 +11,33 @@ public class ProdCons implements Tampon {
 	private int in;
 	private int out;
 	private int nplein;
+	private int nb_prodcts_terminated;
+	private int nb_producteurs_total;
+	
+	private int nb_message_tampon;
 	private Message[] tampon;
 	
 	
-	public ProdCons(int taille_tampon) {
+	public ProdCons(int taille_tampon, int nb_prod) {
 		super();
 		this.taille_tampon = taille_tampon;
+		this.nb_producteurs_total = nb_prod;
 		System.out.println("taille tampon : " + taille_tampon);
 		this.in = 0;
 		this.out = 0;
 		this.tampon = new MessageX[taille_tampon];
 		this.nplein = 0;
+		this.nb_prodcts_terminated = 0;
+		this.nb_message_tampon = 0;
 	}
+
+
 
 	@Override
 	public int enAttente() {
 		// TODO Auto-generated method stub
-		return in-out;
+		//return in-out;
+		return this.nb_message_tampon;
 	}
 
 	@Override
@@ -37,28 +47,32 @@ public class ProdCons implements Tampon {
 			wait();
 		}
 		
-		Message m = tampon[out];
-		System.out.println("Retrait du message : " + m.toString());
+		MessageX m = (MessageX) tampon[out];
+		//System.out.println("Retrait du message : " + m.toString());
 		out = (out+1)%this.taille_tampon;
 		this.nplein--;
+		this.nb_message_tampon = this.nb_message_tampon-1;
 		notifyAll();
 		// TODO Auto-generated method stub
+		System.out.println("---------------------------Retrait du message : "+ m.getNumero_message());
+		System.out.println();
 		return m;
 	}
 
 	@Override
 	public synchronized void put(_Producteur p, Message msg) throws Exception, InterruptedException {
 		// TODO Auto-generated method stub
-		System.out.println("tampon : " + this.taille_tampon + " nplein : " + this.nplein);
 		while (this.nplein >= this.taille_tampon) {
 			System.out.println("Le producteur : " + p.identification() + " part en wait().");
 			wait();
 		}
 		
-		System.out.println("Dépose du message : " + msg.toString());
+		System.out.println("+++++++++++++++++++++++++++Dépose du message : " + msg.toString());
+		System.out.println();
 		tampon[in] = msg;
 		in = (in+1)%this.taille_tampon;
 		nplein++;
+		this.nb_message_tampon = this.nb_message_tampon + 1;
 		
 		notifyAll();
 		
@@ -68,6 +82,18 @@ public class ProdCons implements Tampon {
 	public int taille() {
 		// TODO Auto-generated method stub
 		return this.taille_tampon;
+	}
+	
+	public int getNb_prodcts_terminated() {
+		return nb_prodcts_terminated;
+	}
+
+	public void incrNb_prodcts_terminated() {
+		this.nb_prodcts_terminated = this.nb_prodcts_terminated+1;
+	}
+	
+	public boolean production_terminee() {
+		return (this.nb_producteurs_total==this.nb_prodcts_terminated);
 	}
 
 }
