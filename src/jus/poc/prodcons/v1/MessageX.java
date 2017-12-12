@@ -42,7 +42,7 @@ public class MessageX implements Message{
 	}
 	
 	public String toString(){ 
-		return "Message " + numero_message + "du producteur " + p.identification() + " : " + message;
+		return "Message " + numero_message + " du producteur " + p.identification() + " : " + message;
 	}
 
 

@@ -25,6 +25,7 @@ public class Producteur extends Acteur implements _Producteur{
 		NbMessageAProduire = Aleatoire.valeur(nombreMoyenDeProduction,deviationNombreMoyenDeProduction);
 		TempsProduction= new Aleatoire(moyenneTempsDeTraitement, deviationTempsDeTraitement);
 		nombreDeMess=0;
+		System.out.println("Producteur "+identification()+" vient d'etre crée");
 	}
 	
 
@@ -56,9 +57,9 @@ public class Producteur extends Acteur implements _Producteur{
 				e.printStackTrace();
 			}
 
-		System.out.println(toString()+"a tout fini");
 			
 		}
+		System.out.println(toString()+"a tout fini");
 	
 	}
 	
