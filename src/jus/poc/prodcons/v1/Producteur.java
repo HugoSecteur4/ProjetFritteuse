@@ -16,6 +16,7 @@ public class Producteur extends Acteur implements _Producteur{
 		super(Acteur.typeProducteur, observateur, moyenneTempsDeTraitement, deviationTempsDeTraitement);
 //		this.ID_Producteur = nb_Prod;
 //		nb_Prod ++;
+
 	}
 
 	@Override
