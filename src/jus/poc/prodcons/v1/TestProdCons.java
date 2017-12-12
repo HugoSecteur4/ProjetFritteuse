@@ -23,7 +23,8 @@ public class TestProdCons extends Simulateur{
 	private int nombreMoyenNbExemplaire = 0;
 	private int deviationNombreMoyenNbExemplaire = 0;
 	
-	public static ProdCons buffer;
+
+	
 	public int getNbProd() {
 		return nbProd;
 	}
@@ -220,10 +221,16 @@ public class TestProdCons extends Simulateur{
 	protected void run() throws Exception {
 		// TODO Auto-generated method stub
 		this.init("../options/option.xml");
-		buffer = new ProdCons(nbBuffer);
-		Producteur test = new Producteur(observateur, tempsMoyenProduction,deviationTempsMoyenProduction);
-		System.out.println(test.toString());
-		System.out.println(this.nbCons);
+		ProdCons buffer = new ProdCons(nbBuffer);
+		
+		for (int i =0; i<nbProd;i++){
+			Producteur producteur = new Producteur(observateur,buffer, tempsMoyenProduction, deviationTempsMoyenProduction, nombreMoyenDeProduction, deviationNombreMoyenDeProduction);
+			System.out.println(producteur.toString()+" vient d'être créé");
+			producteur.start();
+		}
+
+		
+//		System.out.println(this.nbCons);
 		
 	}
 

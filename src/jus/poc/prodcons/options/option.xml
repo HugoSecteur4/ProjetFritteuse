@@ -6,7 +6,7 @@
 Fichier de configuration pour toutes les variables d'execution. Par exemple : Nombre de consommateur.
 </comment>
 
-<entry key="nbProd">1</entry>
+<entry key="nbProd">10</entry>
 <entry key="nbCons">10</entry>
 <entry key="nbBuffer">1</entry>
 <entry key="tempsMoyenProduction">10</entry>

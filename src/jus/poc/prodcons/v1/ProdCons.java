@@ -17,6 +17,7 @@ public class ProdCons implements Tampon {
 	public ProdCons(int taille_tampon) {
 		super();
 		this.taille_tampon = taille_tampon;
+		System.out.println("taille tampon : " + taille_tampon);
 		this.in = 0;
 		this.out = 0;
 		this.tampon = new MessageX[taille_tampon];
@@ -48,6 +49,7 @@ public class ProdCons implements Tampon {
 	@Override
 	public synchronized void put(_Producteur p, Message msg) throws Exception, InterruptedException {
 		// TODO Auto-generated method stub
+		System.out.println("tampon : " + this.taille_tampon + " nplein : " + this.nplein);
 		while (this.nplein >= this.taille_tampon) {
 			System.out.println("Le producteur : " + p.identification() + " part en wait().");
 			wait();
