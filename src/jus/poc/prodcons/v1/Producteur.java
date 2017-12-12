@@ -50,18 +50,21 @@ public class Producteur extends Acteur implements _Producteur{
 				nombreDeMess ++;
 				this.Buff.toString();
 
+
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}
-		
+
 		System.out.println(toString()+"a tout fini");
+			
+		}
 	
 	}
 	
 	public String toString(){
 		return "Producteur " + identification();
+
 	}
 	
 	
