@@ -59,7 +59,7 @@ public class Producteur extends Acteur implements _Producteur{
 
 			
 		}
-		System.out.println(toString()+"a tout fini");
+		System.out.println(toString()+" a fini sa production XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
 	
 	}
 	

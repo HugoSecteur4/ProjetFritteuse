@@ -224,6 +224,13 @@ public class TestProdCons extends Simulateur{
 		for (int i =0; i<nbProd;i++){
 			(new Producteur(observateur,buffer, tempsMoyenProduction, deviationTempsMoyenProduction, nombreMoyenDeProduction, deviationNombreMoyenDeProduction)).start();
 		}
+		
+		for (int i =0; i<nbCons;i++){
+			Consommateur consommateur = new Consommateur(observateur,buffer, tempsMoyenConsommation, deviationTempsMoyenConsommation);
+			consommateur.setDaemon(true);
+			consommateur.start();
+		}
+
 
 		
 //		System.out.println(this.nbCons);

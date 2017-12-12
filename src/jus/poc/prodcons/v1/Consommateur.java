@@ -30,7 +30,7 @@ public class Consommateur extends Acteur implements _Consommateur {
 
 	public void run()
 	{
-		for(int i=0; i< 5; i++){
+		while(Buff.enAttente()==0){
 		try {
 			Thread.sleep(temps_traitement.next());
 		} catch (InterruptedException e) {
@@ -38,7 +38,7 @@ public class Consommateur extends Acteur implements _Consommateur {
 		}
 		// Si on récupère un message : 
 		try {
-//			TestProdCons.buffer.get(this);
+			Buff.get(this).toString();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
