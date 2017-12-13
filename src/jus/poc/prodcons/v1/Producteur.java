@@ -8,9 +8,6 @@ import jus.poc.prodcons._Producteur;
 
 public class Producteur extends Acteur implements _Producteur{
 
-//	protected int ID_Producteur;
-//	
-//	protected int nb_Prod = 0;
 	private ProdCons Buff;
 	private Aleatoire TempsProduction;
 	private int nombreDeMess;
@@ -19,8 +16,6 @@ public class Producteur extends Acteur implements _Producteur{
 	protected Producteur(Observateur observateur,ProdCons Buffer, int moyenneTempsDeTraitement,
 			int deviationTempsDeTraitement, int nombreMoyenDeProduction, int deviationNombreMoyenDeProduction) throws ControlException {
 		super(Acteur.typeProducteur, observateur, moyenneTempsDeTraitement, deviationTempsDeTraitement);
-//		this.ID_Producteur = nb_Prod;
-//		nb_Prod ++;
 		this.Buff=Buffer;
 		NbMessageAProduire = Aleatoire.valeur(nombreMoyenDeProduction,deviationNombreMoyenDeProduction);
 		TempsProduction= new Aleatoire(moyenneTempsDeTraitement, deviationTempsDeTraitement);
@@ -31,7 +26,6 @@ public class Producteur extends Acteur implements _Producteur{
 
 	@Override
 	public int nombreDeMessages() {
-		// TODO Auto-generated method stub
 		return nombreDeMess;
 	}
 	
@@ -46,7 +40,6 @@ public class Producteur extends Acteur implements _Producteur{
 			try {
 				Thread.sleep(TempsProduction.next());
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			
@@ -72,7 +65,6 @@ public class Producteur extends Acteur implements _Producteur{
 
 
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 
@@ -90,7 +82,6 @@ public class Producteur extends Acteur implements _Producteur{
 			yield();
 			System.out.println("COMMUTATION");
 		}
-		//System.out.println(toString()+" a fini sa production XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
 	
 	}
 	

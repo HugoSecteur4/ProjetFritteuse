@@ -7,6 +7,7 @@ import java.util.Properties;
 
 import jus.poc.prodcons.Observateur;
 import jus.poc.prodcons.Simulateur;
+//import jus.poc.prodcons.v2.Consommateur;
 
 
 public class TestProdCons extends Simulateur{
@@ -227,7 +228,6 @@ public class TestProdCons extends Simulateur{
 		
 		for (int i =0; i<nbCons;i++){
 			Consommateur consommateur = new Consommateur(observateur,buffer, tempsMoyenConsommation, deviationTempsMoyenConsommation);
-			//consommateur.setDaemon(true);
 			consommateur.start();
 		}
 

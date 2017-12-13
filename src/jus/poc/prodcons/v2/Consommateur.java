@@ -5,7 +5,7 @@ import jus.poc.prodcons.Aleatoire;
 import jus.poc.prodcons.ControlException;
 import jus.poc.prodcons.Observateur;
 import jus.poc.prodcons._Consommateur;
-import jus.poc.prodcons.v1.ProdCons;
+import jus.poc.prodcons.v2.ProdCons;
 
 public class Consommateur extends Acteur implements _Consommateur {
 
@@ -13,11 +13,11 @@ public class Consommateur extends Acteur implements _Consommateur {
 	protected int NbMessageConso = 0;
 	ProdCons Buff;
 
-	protected Consommateur(Observateur observateur, ProdCons Buffer, int moyenneTempsDeTraitement,
+	protected Consommateur(Observateur observateur, ProdCons buffer, int moyenneTempsDeTraitement,
 			int deviationTempsDeTraitement) throws ControlException {
 		super(Acteur.typeConsommateur, observateur, moyenneTempsDeTraitement, deviationTempsDeTraitement);
 		temps_consommation = new Aleatoire(moyenneTempsDeTraitement, deviationTempsDeTraitement);
-		this.Buff = Buffer;
+		this.Buff = buffer;
 	}
 
 	@Override

@@ -1,6 +1,8 @@
 package jus.poc.prodcons.v2;
 
 
+import java.util.concurrent.Semaphore;
+
 import jus.poc.prodcons.Message;
 import jus.poc.prodcons.Tampon;
 import jus.poc.prodcons._Consommateur;
@@ -10,12 +12,15 @@ public class ProdCons implements Tampon {
 	private int taille_tampon;
 	private int in;
 	private int out;
-	private int nplein;
 	private int nb_prodcts_terminated;
 	private int nb_producteurs_total;
 	
 	private int nb_message_tampon;
 	private Message[] tampon;
+	private Semaphore mutexIn;
+	private Semaphore mutexOut;
+	private Semaphore notFull;
+	private Semaphore notEmpty;
 	
 	
 	public ProdCons(int taille_tampon, int nb_prod) {
@@ -26,61 +31,55 @@ public class ProdCons implements Tampon {
 		this.in = 0;
 		this.out = 0;
 		this.tampon = new MessageX[taille_tampon];
-		this.nplein = 0;
 		this.nb_prodcts_terminated = 0;
 		this.nb_message_tampon = 0;
+		mutexIn = new Semaphore(1);
+		mutexOut = new Semaphore(1);
+		notFull = new Semaphore(taille_tampon);
+		notEmpty = new Semaphore(0);
+		
 	}
 
 
 
 	@Override
 	public int enAttente() {
-		// TODO Auto-generated method stub
-		//return in-out;
 		return this.nb_message_tampon;
 	}
 
 	@Override
-	public synchronized Message get(_Consommateur c) throws Exception, InterruptedException {
-		while (nplein <= 0) {
-			System.out.println("Le consommateur : " + c.identification() + " part en wait().");
-			wait();
-		}
-		
+	public Message get(_Consommateur c) throws Exception, InterruptedException {
+
+		notEmpty.acquire();
+		mutexOut.acquire();
 		MessageX m = (MessageX) tampon[out];
-		//System.out.println("Retrait du message : " + m.toString());
 		out = (out+1)%this.taille_tampon;
-		this.nplein--;
 		this.nb_message_tampon = this.nb_message_tampon-1;
-		notifyAll();
-		// TODO Auto-generated method stub
 		System.out.println("---------------------------Retrait du message : "+ m.getNumero_message());
 		System.out.println();
+		mutexOut.release();
+		notFull.release();
+
 		return m;
 	}
 
 	@Override
-	public synchronized void put(_Producteur p, Message msg) throws Exception, InterruptedException {
-		// TODO Auto-generated method stub
-		while (this.nplein >= this.taille_tampon) {
-			System.out.println("Le producteur : " + p.identification() + " part en wait().");
-			wait();
-		}
-		
+	public  void put(_Producteur p, Message msg) throws Exception, InterruptedException {
+		notFull.acquire();
+		mutexIn.acquire();
 		System.out.println("+++++++++++++++++++++++++++Dépose du message : " + msg.toString());
 		System.out.println();
 		tampon[in] = msg;
 		in = (in+1)%this.taille_tampon;
-		nplein++;
 		this.nb_message_tampon = this.nb_message_tampon + 1;
+		mutexIn.release();
+		notEmpty.release();
 		
-		notifyAll();
-		
-	}
+	}			//consommateur.setDaemon(true);
+
 
 	@Override
 	public int taille() {
-		// TODO Auto-generated method stub
 		return this.taille_tampon;
 	}
 	

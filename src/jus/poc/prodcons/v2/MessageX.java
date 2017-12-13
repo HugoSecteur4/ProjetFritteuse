@@ -22,7 +22,7 @@ public class MessageX implements Message{
 	}
 	
 	public int getNumero_message() {
-		return numero_message;
+		return this.numero_message;
 	}
 
 	public void setNumero_message(int numero_message) {

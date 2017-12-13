@@ -22,7 +22,6 @@ public class Consommateur extends Acteur implements _Consommateur {
 
 	@Override
 	public int nombreDeMessages() {
-		// TODO Auto-generated method stub
 		return NbMessageConso;
 	}
 
@@ -62,7 +61,6 @@ public class Consommateur extends Acteur implements _Consommateur {
 				yield();
 				System.out.println("COMMUTATION");
 			}
-			// Si on récupère un message :
 
 			NbMessageConso++;
 		}
@@ -70,7 +68,6 @@ public class Consommateur extends Acteur implements _Consommateur {
 			yield();
 			System.out.println("COMMUTATION");
 		}
-		//System.out.println("consommation terminée, nbmessageconso : " + this.NbMessageConso + " message de fin : " + nummessage + " prod terminee : " + Buff.production_terminee() + " en attente : " + Buff.enAttente());
 	}
 
 	public String toString() {

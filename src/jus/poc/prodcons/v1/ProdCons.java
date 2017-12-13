@@ -35,8 +35,6 @@ public class ProdCons implements Tampon {
 
 	@Override
 	public int enAttente() {
-		// TODO Auto-generated method stub
-		//return in-out;
 		return this.nb_message_tampon;
 	}
 
@@ -48,12 +46,10 @@ public class ProdCons implements Tampon {
 		}
 		
 		MessageX m = (MessageX) tampon[out];
-		//System.out.println("Retrait du message : " + m.toString());
 		out = (out+1)%this.taille_tampon;
 		this.nplein--;
 		this.nb_message_tampon = this.nb_message_tampon-1;
 		notifyAll();
-		// TODO Auto-generated method stub
 		System.out.println("---------------------------Retrait du message : "+ m.getNumero_message());
 		System.out.println();
 		return m;
@@ -61,7 +57,6 @@ public class ProdCons implements Tampon {
 
 	@Override
 	public synchronized void put(_Producteur p, Message msg) throws Exception, InterruptedException {
-		// TODO Auto-generated method stub
 		while (this.nplein >= this.taille_tampon) {
 			System.out.println("Le producteur : " + p.identification() + " part en wait().");
 			wait();
@@ -80,7 +75,6 @@ public class ProdCons implements Tampon {
 
 	@Override
 	public int taille() {
-		// TODO Auto-generated method stub
 		return this.taille_tampon;
 	}
 	
