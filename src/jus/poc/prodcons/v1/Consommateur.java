@@ -29,6 +29,20 @@ public class Consommateur extends Acteur implements _Consommateur {
 		int nummessage = 0;
 		MessageX m;
 		while (!Buff.production_terminee() || Buff.enAttente() != 0) {
+			try {
+				if (Math.random()<=0.5) {
+					yield();
+					System.out.println("COMMUTATION");
+				}
+				Thread.sleep(temps_consommation.next());
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+				
+			}
+			if (Math.random()<=0.5) {
+				yield();
+				System.out.println("COMMUTATION");
+			}
 			
 			try {
 				if (Math.random()<=0.5) {
@@ -47,20 +61,6 @@ public class Consommateur extends Acteur implements _Consommateur {
 				e.printStackTrace();
 			}
 
-			try {
-				if (Math.random()<=0.5) {
-					yield();
-					System.out.println("COMMUTATION");
-				}
-				Thread.sleep(temps_consommation.next());
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-				
-			}
-			if (Math.random()<=0.5) {
-				yield();
-				System.out.println("COMMUTATION");
-			}
 
 			NbMessageConso++;
 		}

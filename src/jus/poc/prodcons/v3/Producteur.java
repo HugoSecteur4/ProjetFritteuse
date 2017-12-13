@@ -33,14 +33,15 @@ public class Producteur extends Acteur implements _Producteur{
 	
 	public void run()
 	{	
-	
+	int tpsprod=0;
 		for(int i=0;i<NbMessageAProduire;i++){
 			if (Math.random()<=0.5) {
 				yield();
 				System.out.println("COMMUTATION");
 			}
 			try {
-				Thread.sleep(TempsProduction.next());
+				tpsprod=TempsProduction.next();
+				Thread.sleep(tpsprod);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -55,6 +56,8 @@ public class Producteur extends Acteur implements _Producteur{
 					m = new MessageX("Bonjour, je suis le producteur "+this.identification()+ " ceci est mon message n°"+this.nombreDeMess+1, this);
 				}
 				this.Buff.put(this,m);
+				observateur.productionMessage(this, m, tpsprod);
+				
 				if (Math.random()<=0.5) {
 					yield();
 					System.out.println("COMMUTATION");

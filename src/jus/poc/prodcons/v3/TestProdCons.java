@@ -212,15 +212,19 @@ public class TestProdCons extends Simulateur{
 	@Override
 	protected void run() throws Exception {
 		this.init("../options/option.xml");
+		observateur.init( nbProd, nbCons, nbBuffer);
 		ProdCons buffer = new ProdCons(nbBuffer, this.nbProd);
 		
 		for (int i =0; i<nbProd;i++){
-			(new Producteur(observateur,buffer, tempsMoyenProduction, deviationTempsMoyenProduction, nombreMoyenDeProduction, deviationNombreMoyenDeProduction)).start();
+			Producteur producteur = new Producteur(observateur,buffer, tempsMoyenProduction, deviationTempsMoyenProduction, nombreMoyenDeProduction, deviationNombreMoyenDeProduction);;
+			producteur.start();
+			observateur.newProducteur(producteur);
 		}
 		
 		for (int i =0; i<nbCons;i++){
 			Consommateur consommateur = new Consommateur(observateur,buffer, tempsMoyenConsommation, deviationTempsMoyenConsommation);
 			consommateur.start();
+			observateur.newConsommateur(consommateur);
 		}
 
 
