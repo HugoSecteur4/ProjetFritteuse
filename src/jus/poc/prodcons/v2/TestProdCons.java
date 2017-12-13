@@ -182,7 +182,6 @@ public class TestProdCons extends Simulateur{
 			
 			properties.loadFromXML(getClass().getResourceAsStream(file));
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 
 		String key;
@@ -194,16 +193,12 @@ public class TestProdCons extends Simulateur{
 		try {
 			thisOne.getDeclaredField(key).set(this,value);
 		} catch (IllegalArgumentException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (NoSuchFieldException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SecurityException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		}
@@ -212,12 +207,10 @@ public class TestProdCons extends Simulateur{
 	
 	public TestProdCons(Observateur observateur) {
 		super(observateur);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	protected void run() throws Exception {
-		// TODO Auto-generated method stub
 		this.init("../options/option.xml");
 		ProdCons buffer = new ProdCons(nbBuffer, this.nbProd);
 		
@@ -232,7 +225,6 @@ public class TestProdCons extends Simulateur{
 
 
 		
-//		System.out.println(this.nbCons);
 
 
 		
