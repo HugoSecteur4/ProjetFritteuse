@@ -57,6 +57,8 @@ public class ProdCons implements Tampon {
 		this.nb_message_tampon = this.nb_message_tampon-1;
 		System.out.println("---------------------------Retrait du message : "+ m.getNumero_message());
 		System.out.println();
+	    Consommateur cs =(Consommateur) c;
+	    cs.getObservateur().retraitMessage(c,m);
 		mutexOut.release();
 		notFull.release();
 
@@ -72,6 +74,8 @@ public class ProdCons implements Tampon {
 		tampon[in] = msg;
 		in = (in+1)%this.taille_tampon;
 		this.nb_message_tampon = this.nb_message_tampon + 1;
+	    Producteur pr =(Producteur) p;
+	    pr.getObservateur().depotMessage(p, msg);
 		mutexIn.release();
 		notEmpty.release();
 		

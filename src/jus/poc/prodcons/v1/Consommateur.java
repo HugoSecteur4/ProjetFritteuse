@@ -11,7 +11,7 @@ public class Consommateur extends Acteur implements _Consommateur {
 
 	private Aleatoire temps_consommation;
 	protected int NbMessageConso = 0;
-	ProdCons Buff;
+	private ProdCons Buff;
 
 	protected Consommateur(Observateur observateur, ProdCons Buffer, int moyenneTempsDeTraitement,
 			int deviationTempsDeTraitement) throws ControlException {
@@ -29,21 +29,7 @@ public class Consommateur extends Acteur implements _Consommateur {
 		int nummessage = 0;
 		MessageX m;
 		while (!Buff.production_terminee() || Buff.enAttente() != 0) {
-			try {
-				if (Math.random()<=0.5) {
-					yield();
-					System.out.println("COMMUTATION");
-				}
-				Thread.sleep(temps_consommation.next());
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-				
-			}
-			if (Math.random()<=0.5) {
-				yield();
-				System.out.println("COMMUTATION");
-			}
-			
+
 			try {
 				if (Math.random()<=0.5) {
 					yield();
@@ -60,6 +46,21 @@ public class Consommateur extends Acteur implements _Consommateur {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+			try {
+				if (Math.random()<=0.5) {
+					yield();
+					System.out.println("COMMUTATION");
+				}
+				Thread.sleep(temps_consommation.next());
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+				
+			}
+			if (Math.random()<=0.5) {
+				yield();
+				System.out.println("COMMUTATION");
+			}
+			
 
 
 			NbMessageConso++;

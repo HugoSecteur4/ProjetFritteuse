@@ -12,6 +12,7 @@ public class Producteur extends Acteur implements _Producteur{
 	private Aleatoire TempsProduction;
 	private int nombreDeMess;
 	private int NbMessageAProduire;
+	private Observateur observateur;
 	
 	protected Producteur(Observateur observateur,ProdCons Buffer, int moyenneTempsDeTraitement,
 			int deviationTempsDeTraitement, int nombreMoyenDeProduction, int deviationNombreMoyenDeProduction) throws ControlException {
@@ -22,9 +23,13 @@ public class Producteur extends Acteur implements _Producteur{
 		NbMessageAProduire = Aleatoire.valeur(nombreMoyenDeProduction,deviationNombreMoyenDeProduction);
 		TempsProduction= new Aleatoire(moyenneTempsDeTraitement, deviationTempsDeTraitement);
 		nombreDeMess=0;
+		this.observateur=observateur;
 		System.out.println("Producteur "+identification()+" vient d'etre crée");
 	}
 	
+	public Observateur getObservateur (){
+		return this.observateur;
+	}
 
 	@Override
 	public int nombreDeMessages() {
@@ -55,8 +60,8 @@ public class Producteur extends Acteur implements _Producteur{
 				synchronized(Buff) {
 					m = new MessageX("Bonjour, je suis le producteur "+this.identification()+ " ceci est mon message n°"+this.nombreDeMess+1, this);
 				}
-				this.Buff.put(this,m);
 				observateur.productionMessage(this, m, tpsprod);
+				this.Buff.put(this,m);
 				
 				if (Math.random()<=0.5) {
 					yield();

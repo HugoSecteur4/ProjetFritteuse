@@ -11,13 +11,21 @@ public class Consommateur extends Acteur implements _Consommateur {
 
 	private Aleatoire temps_consommation;
 	protected int NbMessageConso = 0;
-	ProdCons Buff;
+	private ProdCons Buff;
+	private Observateur observateur;
+	
 
 	protected Consommateur(Observateur observateur, ProdCons buffer, int moyenneTempsDeTraitement,
 			int deviationTempsDeTraitement) throws ControlException {
 		super(Acteur.typeConsommateur, observateur, moyenneTempsDeTraitement, deviationTempsDeTraitement);
 		temps_consommation = new Aleatoire(moyenneTempsDeTraitement, deviationTempsDeTraitement);
 		this.Buff = buffer;
+		this.observateur=observateur;
+	}
+	
+	public Observateur getObservateur() {
+		
+		return this.observateur;
 	}
 
 	@Override
@@ -30,21 +38,7 @@ public class Consommateur extends Acteur implements _Consommateur {
 		MessageX m;
 		int tpscons =0;
 		while (!Buff.production_terminee() || Buff.enAttente() != 0) {
-			try {
-				if (Math.random()<=0.5) {
-					yield();
-					System.out.println("COMMUTATION");
-				}
-				tpscons = temps_consommation.next();
-				Thread.sleep(tpscons);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-				
-			}
-			if (Math.random()<=0.5) {
-				yield();
-				System.out.println("COMMUTATION");
-			}
+			tpscons = temps_consommation.next();
 			
 			try {
 				if (Math.random()<=0.5) {
@@ -64,6 +58,22 @@ public class Consommateur extends Acteur implements _Consommateur {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+			
+			try {
+				if (Math.random()<=0.5) {
+					yield();
+					System.out.println("COMMUTATION");
+				}
+				
+				Thread.sleep(tpscons);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+				
+			}
+			if (Math.random()<=0.5) {
+				yield();
+				System.out.println("COMMUTATION");
+			}
 
 			// Si on récupère un message :
 
@@ -79,4 +89,6 @@ public class Consommateur extends Acteur implements _Consommateur {
 	public String toString() {
 		return "Consommateur" + identification();
 	}
+
+
 }

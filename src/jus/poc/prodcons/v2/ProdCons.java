@@ -72,6 +72,7 @@ public class ProdCons implements Tampon {
 		tampon[in] = msg;
 		in = (in+1)%this.taille_tampon;
 		this.nb_message_tampon = this.nb_message_tampon + 1;
+		
 		mutexIn.release();
 		notEmpty.release();
 		
