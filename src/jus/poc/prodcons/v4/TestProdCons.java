@@ -236,7 +236,7 @@ public class TestProdCons extends Simulateur{
 		boolean bool=false;
 		int summessprod=0;
 		int summesscons=0;
-		while(bool){
+		while(bool==false){
 			summessprod=0;
 			summesscons=0;
 			
