@@ -38,6 +38,7 @@ public class ProdCons implements Tampon {
 		notFull = new Semaphore(taille_tampon);
 		notEmpty = new Semaphore(0);
 		
+		
 	}
 
 
@@ -79,7 +80,7 @@ public class ProdCons implements Tampon {
 		mutexIn.release();
 		notEmpty.release();
 		
-	}			//consommateur.setDaemon(true);
+	}
 
 
 	@Override

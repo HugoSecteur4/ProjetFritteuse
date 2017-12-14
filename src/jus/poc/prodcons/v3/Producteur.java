@@ -33,7 +33,7 @@ public class Producteur extends Acteur implements _Producteur{
 
 	@Override
 	public int nombreDeMessages() {
-		return nombreDeMess;
+		return NbMessageAProduire;
 	}
 	
 	public void run()
