@@ -71,7 +71,7 @@ public class ProdCons implements Tampon {
 			if(ConsSem.get(c.identification())!=null){
 				//ConsSem.clear();
 				//ProdSem.values()
-				
+				mutexOut.release();
 				ConsSem.get(c.identification()).acquire();
 			}else{
 				Semaphore cc = new Semaphore(1);
@@ -88,16 +88,21 @@ public class ProdCons implements Tampon {
 				m.DecrNbExemplaire();
 				notFull.release();
 				ProdSem.get(m.getP().identification()).release();
+				
+				for(Entry<Integer, Semaphore> entry : ConsSem.entrySet()) {
+					System.out.println(entry.getValue().drainPermits());
+					entry.getValue().release();
+					System.out.println(entry.getValue().drainPermits());
+					System.out.println("on passe "+entry.getKey());
+				}
+				ConsSem.clear();
+				System.out.println("vide ? "+ConsSem.isEmpty());
+				mutexOut.release();
+				
 			}
 			
-			for(Entry<Integer, Semaphore> entry : ConsSem.entrySet()) {
-				System.out.println(entry.getValue().drainPermits());
-				entry.getValue().release();
-				System.out.println(entry.getValue().drainPermits());
-				System.out.println("on passe "+entry.getKey());
-			}
-			ConsSem.clear();
-			System.out.println("vide ? "+ConsSem.isEmpty());
+
+			
 			
 
 		}else{
@@ -118,9 +123,10 @@ public class ProdCons implements Tampon {
 			    cs.getObservateur().retraitMessage(c,m);
 			    m.DecrNbExemplaire();
 			}
+			mutexOut.release();
 		}
 
-		mutexOut.release();
+		
 		System.out.println("mutexout");
 		
 		System.out.println("notfull");
