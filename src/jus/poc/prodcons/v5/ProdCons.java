@@ -1,7 +1,9 @@
 package jus.poc.prodcons.v5;
 
 
-import java.util.concurrent.Semaphore;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 import jus.poc.prodcons.Message;
 import jus.poc.prodcons.Tampon;
@@ -12,15 +14,17 @@ public class ProdCons implements Tampon {
 	private int taille_tampon;
 	private int in;
 	private int out;
+	private int nplein;
 	private int nb_prodcts_terminated;
 	private int nb_producteurs_total;
 	
 	private int nb_message_tampon;
 	private Message[] tampon;
-	private Semaphore mutexIn;
-	private Semaphore mutexOut;
-	private Semaphore notFull;
-	private Semaphore notEmpty;
+	final Lock lock = new ReentrantLock();
+	final Condition notFull  = lock.newCondition(); 
+	final Condition notEmpty = lock.newCondition(); 
+	final Condition mutexIn = lock.newCondition(); 
+	final Condition mutexOut = lock.newCondition(); 
 	
 	
 	public ProdCons(int taille_tampon, int nb_prod) {
@@ -33,11 +37,7 @@ public class ProdCons implements Tampon {
 		this.tampon = new MessageX[taille_tampon];
 		this.nb_prodcts_terminated = 0;
 		this.nb_message_tampon = 0;
-		mutexIn = new Semaphore(1);
-		mutexOut = new Semaphore(1);
-		notFull = new Semaphore(taille_tampon);
-		notEmpty = new Semaphore(0);
-		
+		this.nplein=0;
 		
 	}
 
@@ -51,35 +51,55 @@ public class ProdCons implements Tampon {
 	@Override
 	public Message get(_Consommateur c) throws Exception, InterruptedException {
 
-		notEmpty.acquire();
-		mutexOut.acquire();
-		MessageX m = (MessageX) tampon[out];
-		out = (out+1)%this.taille_tampon;
-		this.nb_message_tampon = this.nb_message_tampon-1;
-		System.out.println("---------------------------Retrait du message : "+ m.getNumero_message());
-		System.out.println();
-	    Consommateur cs =(Consommateur) c;
-	    cs.getObservateur().retraitMessage(c,m);
-		mutexOut.release();
-		notFull.release();
+	    lock.lock();
+	    try{
+	    	while(this.nplein == 0)
+	    	notEmpty.await();
+			MessageX m = (MessageX) tampon[out];
+			this.nplein--;
+			out = (out+1)%this.taille_tampon;
+			this.nb_message_tampon = this.nb_message_tampon-1;
+			System.out.println("---------------------------Retrait du message : "+ m.getNumero_message());
+			System.out.println();
+		    Consommateur cs =(Consommateur) c;
+		    cs.getObservateur().retraitMessage(c,m);
+//			mutexOut.signal();
+			notFull.signal();
+//		    mutexOut.await();
+			return m;
 
-		return m;
+	    }finally{
+			lock.unlock();
+
+	    }
+//	    notEmpty.await();
+
+
+
 	}
 
 	@Override
 	public  void put(_Producteur p, Message msg) throws Exception, InterruptedException {
-		notFull.acquire();
-		mutexIn.acquire();
-		System.out.println("+++++++++++++++++++++++++++Dépose du message : " + msg.toString());
-		System.out.println();
-		tampon[in] = msg;
-		in = (in+1)%this.taille_tampon;
-		this.nb_message_tampon = this.nb_message_tampon + 1;
-	    Producteur pr =(Producteur) p;
-	    pr.getObservateur().depotMessage(p, msg);
-		mutexIn.release();
-		notEmpty.release();
-		
+		lock.lock();
+		try{
+			while(this.nplein == this.taille_tampon)
+			notFull.await();
+//			mutexIn.await();
+			System.out.println("+++++++++++++++++++++++++++Dépose du message : " + msg.toString());
+			System.out.println();
+			tampon[in] = msg;
+			this.nplein++;
+			in = (in+1)%this.taille_tampon;
+			this.nb_message_tampon = this.nb_message_tampon + 1;
+		    Producteur pr =(Producteur) p;
+		    pr.getObservateur().depotMessage(p, msg);
+//			mutexIn.signal();
+			notEmpty.signal();
+		}finally{
+			lock.unlock();
+
+		}
+
 	}
 
 
