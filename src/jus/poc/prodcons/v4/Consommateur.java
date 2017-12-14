@@ -45,16 +45,28 @@ public class Consommateur extends Acteur implements _Consommateur {
 					yield();
 					System.out.println("COMMUTATION");
 				}
+				
+				
 				m = (MessageX) Buff.get(this);
 				observateur.consommationMessage(this, m, tpscons);
 
 				nummessage = m.getNumero_message();
+				
+				
 				if (Math.random()<=0.5) {
 					yield();
 					System.out.println("COMMUTATION");
 				}
+				
+				
+				
 				System.out.println("***************************Traitement du message par le consommateur : " +this.identification() +", message : " + m.toString());
 				System.out.println();
+				NbMessageConso++;
+				System.out.println("c "+this.identification()+"j'ai conso :"+NbMessageConso);
+				
+				
+				
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -77,13 +89,13 @@ public class Consommateur extends Acteur implements _Consommateur {
 
 			// Si on récupère un message :
 
-			NbMessageConso++;
+			
 		}
 		if (Math.random()<=0.5) {
 			yield();
 			System.out.println("COMMUTATION");
 		}
-		System.out.println("consommation terminée, nbmessageconso : " + this.NbMessageConso + " message de fin : " + nummessage + " prod terminee : " + Buff.production_terminee() + " en attente : " + Buff.enAttente());
+		System.out.println("consommation terminée, nbmessageconso : " + this.NbMessageConso + " message de fin : " + nummessage + " prod terminee : " + Buff.production_terminee()+" conso :"+this.identification());
 	}
 
 	public String toString() {

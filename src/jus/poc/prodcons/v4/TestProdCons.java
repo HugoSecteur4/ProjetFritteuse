@@ -5,6 +5,7 @@ import java.util.InvalidPropertiesFormatException;
 import java.util.Map;
 import java.util.Properties;
 
+import jus.poc.prodcons.Aleatoire;
 import jus.poc.prodcons.Observateur;
 import jus.poc.prodcons.Simulateur;
 
@@ -213,23 +214,44 @@ public class TestProdCons extends Simulateur{
 	protected void run() throws Exception {
 		this.init("../options/option.xml");
 		observateur.init( nbProd, nbCons, nbBuffer);
-		ProdCons buffer = new ProdCons(nbBuffer, this.nbProd);
+		Producteur producteur[]=new Producteur[nbProd];
+		Consommateur consommateur[]=new Consommateur[nbCons];
+
 		
+		ProdCons buffer = new ProdCons(nbBuffer, this.nbProd);
+		Aleatoire a = new Aleatoire(this.nombreMoyenNbExemplaire,this.deviationNombreMoyenNbExemplaire);
 		for (int i =0; i<nbProd;i++){
-			Producteur producteur = new Producteur(observateur,buffer, tempsMoyenProduction, deviationTempsMoyenProduction, nombreMoyenDeProduction, deviationNombreMoyenDeProduction);;
-			producteur.start();
-			observateur.newProducteur(producteur);
+			
+			producteur [i] = new Producteur(observateur,buffer, tempsMoyenProduction, deviationTempsMoyenProduction, nombreMoyenDeProduction, deviationNombreMoyenDeProduction,a.next());;
+			producteur[i].start();
+			observateur.newProducteur(producteur[i]);
 		}
 		
 		for (int i =0; i<nbCons;i++){
-			Consommateur consommateur = new Consommateur(observateur,buffer, tempsMoyenConsommation, deviationTempsMoyenConsommation);
-			consommateur.start();
-			observateur.newConsommateur(consommateur);
+			consommateur [i] = new Consommateur(observateur,buffer, tempsMoyenConsommation, deviationTempsMoyenConsommation);
+			consommateur[i].setDaemon(true);
+			consommateur[i].start();
+			observateur.newConsommateur(consommateur[i]);
 		}
-
-
-		
-
+		boolean bool=false;
+		int summessprod=0;
+		int summesscons=0;
+		while(bool){
+			summessprod=0;
+			summesscons=0;
+			
+			for (int i =0; i<nbProd;i++){
+				summessprod+=producteur[i].nombreDeMessages()*producteur[i].getNbExemplaire();
+			}
+			for (int i =0; i<nbCons;i++){
+				summesscons+=consommateur[i].nombreDeMessages();
+			}
+			
+			bool = summesscons==summessprod;
+			
+			
+		}
+		System.out.println("nb produit = "+summessprod+" nb conso = "+summesscons);
 
 		
 	}
