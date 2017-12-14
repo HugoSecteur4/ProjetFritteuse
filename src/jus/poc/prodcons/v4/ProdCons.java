@@ -1,6 +1,9 @@
-package jus.poc.prodcons.v3;
+package jus.poc.prodcons.v4;
 
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.concurrent.Semaphore;
 
 import jus.poc.prodcons.Message;
@@ -21,6 +24,8 @@ public class ProdCons implements Tampon {
 	private Semaphore mutexOut;
 	private Semaphore notFull;
 	private Semaphore notEmpty;
+	private Map<Integer,Semaphore> ConsSem;
+	private Map<Integer,Semaphore> ProdSem;
 	
 	
 	public ProdCons(int taille_tampon, int nb_prod) {
@@ -36,9 +41,10 @@ public class ProdCons implements Tampon {
 		mutexIn = new Semaphore(1);
 		mutexOut = new Semaphore(1);
 		notFull = new Semaphore(taille_tampon);
-		notEmpty = new Semaphore(0);
-		
-		
+		notEmpty = new  Semaphore(0);
+		ProdSem = new HashMap<>();
+		ConsSem = new HashMap<>();
+				
 	}
 
 
@@ -54,12 +60,56 @@ public class ProdCons implements Tampon {
 		notEmpty.acquire();
 		mutexOut.acquire();
 		MessageX m = (MessageX) tampon[out];
-		out = (out+1)%this.taille_tampon;
-		this.nb_message_tampon = this.nb_message_tampon-1;
-		System.out.println("---------------------------Retrait du message : "+ m.getNumero_message());
-		System.out.println();
-	    Consommateur cs =(Consommateur) c;
-	    cs.getObservateur().retraitMessage(c,m);
+		System.out.println("out : "+out);
+		if(m.getNbExemplaire()==1){
+			System.out.println("ggggggggggggggggggggggggggggggg");
+			if(ConsSem.get(c.identification())!=null){
+				//ConsSem.clear();
+				//ProdSem.values()
+				
+				ConsSem.get(c.identification()).acquire();
+			}else{
+				Semaphore cc = new Semaphore(1);
+				cc.acquire();
+				ConsSem.put(c.identification(), cc);
+				
+				out = (out+1)%this.taille_tampon;
+				this.nb_message_tampon = this.nb_message_tampon-1;
+				System.out.println("---------------------------Retrait d'un exemplaire message : "+ m.getNumero_message() + " - " + m.getNbExemplaire());
+				System.out.println();
+			    Consommateur cs =(Consommateur) c;
+			    cs.getObservateur().retraitMessage(c,m);
+				
+				m.DecrNbExemplaire();
+				
+				ProdSem.get(m.getP().identification()).release();
+			}
+			
+			for(Entry<Integer, Semaphore> entry : ConsSem.entrySet()) {
+				entry.getValue().release();
+			}
+			ConsSem.clear();
+			
+
+		}else{
+			if(ConsSem.get(c.identification())!=null){
+				//ConsSem.clear();
+				//ProdSem.values()
+				
+				ConsSem.get(c.identification()).acquire();
+			}else{
+				Semaphore cc = new Semaphore(1);
+				cc.acquire();
+				ConsSem.put(c.identification(), cc);
+				
+				System.out.println("---------------------------Retrait d'un exemplaire message : "+ m.getNumero_message() + " - " + m.getNbExemplaire());
+				System.out.println();
+			    Consommateur cs =(Consommateur) c;
+			    cs.getObservateur().retraitMessage(c,m);
+			    m.DecrNbExemplaire();
+			}
+		}
+
 		mutexOut.release();
 		notFull.release();
 
@@ -70,6 +120,16 @@ public class ProdCons implements Tampon {
 	public  void put(_Producteur p, Message msg) throws Exception, InterruptedException {
 		notFull.acquire();
 		mutexIn.acquire();
+		
+		if (ProdSem.get(p.identification())!=null) {
+			ProdSem.get(p.identification()).acquire();
+		} else {
+			Semaphore se = new Semaphore(1);
+			ProdSem.put(p.identification(),se);
+			se.acquire();
+		}
+		
+
 		System.out.println("+++++++++++++++++++++++++++Dépose du message : " + msg.toString());
 		System.out.println();
 		tampon[in] = msg;

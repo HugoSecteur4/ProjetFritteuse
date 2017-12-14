@@ -1,4 +1,4 @@
-package jus.poc.prodcons.v3;
+package jus.poc.prodcons.v4;
 
 import jus.poc.prodcons.Acteur;
 import jus.poc.prodcons.Aleatoire;
@@ -58,7 +58,7 @@ public class Producteur extends Acteur implements _Producteur{
 				}
 				MessageX m;
 				synchronized(Buff) {
-					m = new MessageX("Bonjour, je suis le producteur "+this.identification()+ " ceci est mon message n°"+this.nombreDeMess+1, this);
+					m = new MessageX("Bonjour, je suis le producteur "+this.identification()+ " ceci est mon message n°"+this.nombreDeMess+1, this,5);
 				}
 				observateur.productionMessage(this, m, tpsprod);
 				this.Buff.put(this,m);
