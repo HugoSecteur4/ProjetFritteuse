@@ -87,6 +87,7 @@ public class ProdCons implements Tampon {
 				
 				m.DecrNbExemplaire();
 				
+				notFull.release();
 				ProdSem.get(m.getP().identification()).release();
 			}
 			
@@ -122,8 +123,7 @@ public class ProdCons implements Tampon {
 
 		mutexOut.release();
 		System.out.println("mutexout");
-		notFull.release();
-		System.out.println("notfull");
+
 
 
 		return m;

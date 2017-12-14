@@ -8,7 +8,7 @@ Fichier de configuration pour toutes les variables d'execution. Par exemple : No
 
 <entry key="nbProd">5</entry>
 <entry key="nbCons">6</entry>
-<entry key="nbBuffer">5</entry>
+<entry key="nbBuffer">2</entry>
 <entry key="tempsMoyenProduction">50</entry>
 <entry key="deviationTempsMoyenProduction">1</entry>
 <entry key="tempsMoyenConsommation">2000</entry>
