@@ -119,6 +119,8 @@ public class ProdCons implements Tampon {
 			    cs.getObservateur().retraitMessage(c,m);
 			    m.DecrNbExemplaire();
 			}
+			mutexOut.release();
+
 		}
 
 		mutexOut.release();
