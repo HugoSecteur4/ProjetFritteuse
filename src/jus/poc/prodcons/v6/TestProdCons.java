@@ -1,4 +1,4 @@
-package jus.poc.prodcons.v2;
+package jus.poc.prodcons.v6;
 
 import java.io.IOException;
 import java.util.InvalidPropertiesFormatException;
@@ -7,7 +7,8 @@ import java.util.Properties;
 
 import jus.poc.prodcons.Observateur;
 import jus.poc.prodcons.Simulateur;
-	
+
+
 
 public class TestProdCons extends Simulateur{
 
@@ -22,6 +23,7 @@ public class TestProdCons extends Simulateur{
 	private int deviationNombreMoyenDeProduction = 0;
 	private int nombreMoyenNbExemplaire = 0;
 	private int deviationNombreMoyenNbExemplaire = 0;
+	private MyObservateur MyObs;
 	
 	public int getNbProd() {
 		return nbProd;
@@ -205,13 +207,16 @@ public class TestProdCons extends Simulateur{
 	
 	}
 	
-	public TestProdCons(Observateur observateur) {
+	public TestProdCons(Observateur observateur, MyObservateur MyObs) {
 		super(observateur);
+		this.MyObs = MyObs;
 	}
 
 	@Override
 	protected void run() throws Exception {
 		this.init("../options/option.xml");
+		observateur.init( nbProd, nbCons, nbBuffer);
+		MyObs.init(nbProd, nbCons, nbBuffer);
 		Producteur producteur[]=new Producteur[nbProd];
 		Consommateur consommateur[]=new Consommateur[nbCons];
 
@@ -219,41 +224,48 @@ public class TestProdCons extends Simulateur{
 		ProdCons buffer = new ProdCons(nbBuffer, this.nbProd);
 		
 		for (int i =0; i<nbProd;i++){
-			producteur [i] = new Producteur(observateur,buffer, tempsMoyenProduction, deviationTempsMoyenProduction, nombreMoyenDeProduction, deviationNombreMoyenDeProduction);;
+			producteur [i] = new Producteur(observateur,MyObs,buffer, tempsMoyenProduction, deviationTempsMoyenProduction, nombreMoyenDeProduction, deviationNombreMoyenDeProduction);;
 			producteur[i].start();
+			observateur.newProducteur(producteur[i]);
+			MyObs.newProducteur(producteur[i]);
 		}
 		
 		for (int i =0; i<nbCons;i++){
-			consommateur [i] = new Consommateur(observateur,buffer, tempsMoyenConsommation, deviationTempsMoyenConsommation);
+			consommateur [i] = new Consommateur(observateur,MyObs,buffer, tempsMoyenConsommation, deviationTempsMoyenConsommation);
 			consommateur[i].setDaemon(true);
 			consommateur[i].start();
+			observateur.newConsommateur(consommateur[i]);
+			MyObs.newConsommateur(consommateur[i]);
 		}
 		boolean bool=false;
-		
+		int summessprod=0;
+		int summesscons=0;
 		while(bool==false){
-			int SumMessProd=0;
-			int SumMessCons=0;
+
 			
 			for (int i =0; i<nbProd;i++){
-				SumMessProd+=producteur[i].nombreDeMessages();
+				summessprod+=producteur[i].nombreDeMessages();
 			}
 			for (int i =0; i<nbCons;i++){
-				SumMessCons+=consommateur[i].nombreDeMessages();
+				summesscons+=consommateur[i].nombreDeMessages();
 			}
 			
-			bool = SumMessProd==SumMessCons;
+			bool = summesscons==summessprod;
 			
 			
 		}
-
+		
+		MyObs.nbMsgProduits_eg_nbMsgConsumes(summessprod, summesscons);
+		
 
 
 		
+
 
 
 		
 	}
 
-	public static void main(String[] args){new TestProdCons(new Observateur()).start();}
+	public static void main(String[] args){new TestProdCons(new Observateur(),new MyObservateur()).start();}
 	
 }

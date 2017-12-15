@@ -1,4 +1,4 @@
-package jus.poc.prodcons.v2;
+package jus.poc.prodcons.v5;
 
 import java.io.IOException;
 import java.util.InvalidPropertiesFormatException;
@@ -7,7 +7,8 @@ import java.util.Properties;
 
 import jus.poc.prodcons.Observateur;
 import jus.poc.prodcons.Simulateur;
-	
+
+
 
 public class TestProdCons extends Simulateur{
 
@@ -212,6 +213,7 @@ public class TestProdCons extends Simulateur{
 	@Override
 	protected void run() throws Exception {
 		this.init("../options/option.xml");
+		observateur.init( nbProd, nbCons, nbBuffer);
 		Producteur producteur[]=new Producteur[nbProd];
 		Consommateur consommateur[]=new Consommateur[nbCons];
 
@@ -221,34 +223,36 @@ public class TestProdCons extends Simulateur{
 		for (int i =0; i<nbProd;i++){
 			producteur [i] = new Producteur(observateur,buffer, tempsMoyenProduction, deviationTempsMoyenProduction, nombreMoyenDeProduction, deviationNombreMoyenDeProduction);;
 			producteur[i].start();
+			observateur.newProducteur(producteur[i]);
 		}
 		
 		for (int i =0; i<nbCons;i++){
 			consommateur [i] = new Consommateur(observateur,buffer, tempsMoyenConsommation, deviationTempsMoyenConsommation);
 			consommateur[i].setDaemon(true);
 			consommateur[i].start();
+			observateur.newConsommateur(consommateur[i]);
 		}
 		boolean bool=false;
 		
 		while(bool==false){
-			int SumMessProd=0;
-			int SumMessCons=0;
+			int summessprod=0;
+			int summesscons=0;
 			
 			for (int i =0; i<nbProd;i++){
-				SumMessProd+=producteur[i].nombreDeMessages();
+				summessprod+=producteur[i].nombreDeMessages();
 			}
 			for (int i =0; i<nbCons;i++){
-				SumMessCons+=consommateur[i].nombreDeMessages();
+				summesscons+=consommateur[i].nombreDeMessages();
 			}
 			
-			bool = SumMessProd==SumMessCons;
+			bool = summesscons==summessprod;
 			
 			
 		}
 
 
-
 		
+
 
 
 		

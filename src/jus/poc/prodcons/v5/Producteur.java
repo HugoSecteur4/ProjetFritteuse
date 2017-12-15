@@ -1,4 +1,4 @@
-package jus.poc.prodcons.v4;
+package jus.poc.prodcons.v5;
 
 import jus.poc.prodcons.Acteur;
 import jus.poc.prodcons.Aleatoire;
@@ -13,10 +13,9 @@ public class Producteur extends Acteur implements _Producteur{
 	private int nombreDeMess;
 	private int NbMessageAProduire;
 	private Observateur observateur;
-	private int NbExemplaire;
 	
 	protected Producteur(Observateur observateur,ProdCons Buffer, int moyenneTempsDeTraitement,
-			int deviationTempsDeTraitement, int nombreMoyenDeProduction, int deviationNombreMoyenDeProduction,int NbExemplaire) throws ControlException {
+			int deviationTempsDeTraitement, int nombreMoyenDeProduction, int deviationNombreMoyenDeProduction) throws ControlException {
 		super(Acteur.typeProducteur, observateur, moyenneTempsDeTraitement, deviationTempsDeTraitement);
 //		this.ID_Producteur = nb_Prod;
 //		nb_Prod ++;
@@ -24,7 +23,6 @@ public class Producteur extends Acteur implements _Producteur{
 		NbMessageAProduire = Aleatoire.valeur(nombreMoyenDeProduction,deviationNombreMoyenDeProduction);
 		TempsProduction= new Aleatoire(moyenneTempsDeTraitement, deviationTempsDeTraitement);
 		nombreDeMess=0;
-		this.NbExemplaire=NbExemplaire;
 		this.observateur=observateur;
 		System.out.println("Producteur "+identification()+" vient d'etre crée");
 	}
@@ -60,7 +58,7 @@ public class Producteur extends Acteur implements _Producteur{
 				}
 				MessageX m;
 				synchronized(Buff) {
-					m = new MessageX("Bonjour, je suis le producteur "+this.identification()+ " ceci est mon message n°"+this.nombreDeMess+1, this,this.NbExemplaire);
+					m = new MessageX("Bonjour, je suis le producteur "+this.identification()+ " ceci est mon message n°"+this.nombreDeMess+1, this);
 				}
 				observateur.productionMessage(this, m, tpsprod);
 				this.Buff.put(this,m);
@@ -101,10 +99,6 @@ public class Producteur extends Acteur implements _Producteur{
 	public String toString(){
 		return "Producteur " + identification();
 
-	}
-
-	public int getNbExemplaire() {
-		return this.NbExemplaire;
 	}
 	
 	

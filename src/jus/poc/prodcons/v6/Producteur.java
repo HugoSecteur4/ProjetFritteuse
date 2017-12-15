@@ -1,4 +1,4 @@
-package jus.poc.prodcons.v4;
+package jus.poc.prodcons.v6;
 
 import jus.poc.prodcons.Acteur;
 import jus.poc.prodcons.Aleatoire;
@@ -13,10 +13,10 @@ public class Producteur extends Acteur implements _Producteur{
 	private int nombreDeMess;
 	private int NbMessageAProduire;
 	private Observateur observateur;
-	private int NbExemplaire;
+	private MyObservateur MyObsProd;
 	
-	protected Producteur(Observateur observateur,ProdCons Buffer, int moyenneTempsDeTraitement,
-			int deviationTempsDeTraitement, int nombreMoyenDeProduction, int deviationNombreMoyenDeProduction,int NbExemplaire) throws ControlException {
+	protected Producteur(Observateur observateur, MyObservateur MyObs, ProdCons Buffer, int moyenneTempsDeTraitement,
+			int deviationTempsDeTraitement, int nombreMoyenDeProduction, int deviationNombreMoyenDeProduction) throws ControlException {
 		super(Acteur.typeProducteur, observateur, moyenneTempsDeTraitement, deviationTempsDeTraitement);
 //		this.ID_Producteur = nb_Prod;
 //		nb_Prod ++;
@@ -24,8 +24,8 @@ public class Producteur extends Acteur implements _Producteur{
 		NbMessageAProduire = Aleatoire.valeur(nombreMoyenDeProduction,deviationNombreMoyenDeProduction);
 		TempsProduction= new Aleatoire(moyenneTempsDeTraitement, deviationTempsDeTraitement);
 		nombreDeMess=0;
-		this.NbExemplaire=NbExemplaire;
 		this.observateur=observateur;
+		this.setMyObsProd(MyObs);
 		System.out.println("Producteur "+identification()+" vient d'etre crée");
 	}
 	
@@ -60,9 +60,10 @@ public class Producteur extends Acteur implements _Producteur{
 				}
 				MessageX m;
 				synchronized(Buff) {
-					m = new MessageX("Bonjour, je suis le producteur "+this.identification()+ " ceci est mon message n°"+this.nombreDeMess+1, this,this.NbExemplaire);
+					m = new MessageX("Bonjour, je suis le producteur "+this.identification()+ " ceci est mon message n°"+this.nombreDeMess+1, this);
 				}
 				observateur.productionMessage(this, m, tpsprod);
+				this.MyObsProd.productionMessage(this, m, tpsprod);
 				this.Buff.put(this,m);
 				
 				if (Math.random()<=0.5) {
@@ -103,8 +104,12 @@ public class Producteur extends Acteur implements _Producteur{
 
 	}
 
-	public int getNbExemplaire() {
-		return this.NbExemplaire;
+	public MyObservateur getMyObsProd() {
+		return MyObsProd;
+	}
+
+	public void setMyObsProd(MyObservateur myObsProd) {
+		MyObsProd = myObsProd;
 	}
 	
 	
