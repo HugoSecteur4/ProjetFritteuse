@@ -7,7 +7,7 @@ import java.util.Properties;
 
 import jus.poc.prodcons.Observateur;
 import jus.poc.prodcons.Simulateur;
-
+	
 
 public class TestProdCons extends Simulateur{
 
@@ -160,21 +160,7 @@ public class TestProdCons extends Simulateur{
 	* @param file the final name of the file containing the options.
 	*/
 	protected void init(String file) {
-	// retreave the parameters of the application
 	
-	/*final class Properties extends java.util.Properties {
-		Class<?> thisOne = getClass();
-	private static final long serialVersionUID = 1L;
-	public int get(String key){return Integer.parseInt(getProperty(key));}
-	public Properties(String file) {
-	try{
-	loadFromXML(ClassLoader.getSystemResourceAsStream(file));
-	}catch(Exception e){e.printStackTrace();}
-	}
-	}
-	Properties option = new Properties("jus/poc/prodcons/options/"+file);
-	// Integer.parseInt(option.getProperty("nbProd"));
-	*/
 		System.out.println("initialisation");
 		Properties properties = new Properties();
 		

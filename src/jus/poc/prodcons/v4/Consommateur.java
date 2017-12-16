@@ -14,7 +14,14 @@ public class Consommateur extends Acteur implements _Consommateur {
 	private ProdCons Buff;
 	private Observateur observateur;
 	
-
+/**
+ * 
+ * @param observateur
+ * @param buffer
+ * @param moyenneTempsDeTraitement
+ * @param deviationTempsDeTraitement
+ * @throws ControlException
+ */
 	protected Consommateur(Observateur observateur, ProdCons buffer, int moyenneTempsDeTraitement,
 			int deviationTempsDeTraitement) throws ControlException {
 		super(Acteur.typeConsommateur, observateur, moyenneTempsDeTraitement, deviationTempsDeTraitement);
@@ -23,16 +30,26 @@ public class Consommateur extends Acteur implements _Consommateur {
 		this.observateur=observateur;
 	}
 	
+	/**
+	 * 
+	 * @return Retourne l'observateur du Consommateur.
+	 */
 	public Observateur getObservateur() {
 		
 		return this.observateur;
 	}
 
 	@Override
+	/** 
+	 * @return Retourne le nombre de message consommé par le Consommateur.
+	 */
 	public int nombreDeMessages() {
 		return NbMessageConso;
 	}
 
+	/**
+	 * <p> Methode run du Consommateur. </p>
+	 */
 	public void run() {
 		int nummessage = 0;
 		MessageX m;

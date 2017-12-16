@@ -76,7 +76,7 @@ public class ProdCons implements Tampon {
 		mutexIn.release();
 		notEmpty.release();
 		
-	}			//consommateur.setDaemon(true);
+	}			
 
 
 	@Override

@@ -22,7 +22,11 @@ public class ProdCons implements Tampon {
 	private Semaphore notFull;
 	private Semaphore notEmpty;
 	
-	
+	/**
+	 * 
+	 * @param taille_tampon
+	 * @param nb_prod
+	 */
 	public ProdCons(int taille_tampon, int nb_prod) {
 		super();
 		this.taille_tampon = taille_tampon;
@@ -86,18 +90,32 @@ public class ProdCons implements Tampon {
 
 
 	@Override
+	/**
+	 * @return Retourne la taille du tampon.
+	 */
 	public int taille() {
 		return this.taille_tampon;
 	}
 	
+	/**
+	 * 
+	 * @return Retourne le nombre de producteur ayant termine la production.
+	 */
 	public int getNb_prodcts_terminated() {
 		return nb_prodcts_terminated;
 	}
 
+	/**
+	 * <p> Methode d'incrementation du nombre de producteur ayant termine leur production.
+	 */
 	public void incrNb_prodcts_terminated() {
 		this.nb_prodcts_terminated = this.nb_prodcts_terminated+1;
 	}
 	
+	/**
+	 * 
+	 * @return Retourne un boolean indiquant si la production totale a été termine ou non.
+	 */
 	public boolean production_terminee() {
 		return (this.nb_producteurs_total==this.nb_prodcts_terminated);
 	}

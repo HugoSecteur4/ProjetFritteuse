@@ -17,7 +17,6 @@ public class MessageX implements Message{
 		
 		this.p = p;
 		
-		//num_message = num_message +1;
 
 	}
 	
@@ -46,7 +45,6 @@ public class MessageX implements Message{
 	}
 	
 	public String toString(){ 
-		//return "Message " + numero_message + " du producteur " + p.identification() + " : " + message;
 		return "id : " + this.numero_message + " msg : " + message;
 	}
 

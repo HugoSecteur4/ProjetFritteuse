@@ -14,7 +14,16 @@ public class Consommateur extends Acteur implements _Consommateur {
 	private Observateur observateur;
 	private MyObservateur MyObsCons;
 	
-
+	/**
+	 * 
+	 * @param observateur
+	 * @param MyObs
+	 * @param buffer
+	 * @param moyenneTempsDeTraitement
+	 * @param deviationTempsDeTraitement
+	 * @throws ControlException
+	 */
+	
 	protected Consommateur(Observateur observateur, MyObservateur MyObs, ProdCons buffer, int moyenneTempsDeTraitement,
 			int deviationTempsDeTraitement) throws ControlException {
 		super(Acteur.typeConsommateur, observateur, moyenneTempsDeTraitement, deviationTempsDeTraitement);
@@ -24,16 +33,26 @@ public class Consommateur extends Acteur implements _Consommateur {
 		this.setMyObsCons(MyObs);
 	}
 	
+	/**
+	 * 
+	 * @return Retourne l'observateur du Consommateur.
+	 */
 	public Observateur getObservateur() {
 		
 		return this.observateur;
 	}
 
 	@Override
+	/** 
+	 * @return Retourne le nombre de message consommé par le Consommateur.
+	 */
 	public int nombreDeMessages() {
 		return NbMessageConso;
 	}
 
+	/**
+	 * <p> Methode run du Consommateur. </p>
+	 */
 	public void run() {
 		int nummessage = 0;
 		MessageX m;
@@ -85,17 +104,26 @@ public class Consommateur extends Acteur implements _Consommateur {
 			yield();
 			System.out.println("COMMUTATION");
 		}
-		//System.out.println("consommation terminée, nbmessageconso : " + this.NbMessageConso + " message de fin : " + nummessage + " prod terminee : " + Buff.production_terminee() + " en attente : " + Buff.enAttente());
 	}
 
 	public String toString() {
 		return "Consommateur" + identification();
 	}
 
+	 /**
+	 * 
+	 * @return Retourne le MyObservateur du Consommateur.
+	 */
 	public MyObservateur getMyObsCons() {
 		return MyObsCons;
 	}
 
+	/**
+	 * 
+	 * @param myObsCons
+	 * 
+	 * <p>Setter de MyObservateur pour Consommateur.</p>
+	 */
 	public void setMyObsCons(MyObservateur myObsCons) {
 		MyObsCons = myObsCons;
 	}
