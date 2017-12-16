@@ -63,16 +63,12 @@ public class ProdCons implements Tampon {
 	@Override
 	public Message get(_Consommateur c) throws Exception, InterruptedException {
 		if (ConsSem.get(c.identification())==null) {
-			System.out.println("debut " + c.identification());
 
 			notEmpty.acquire();
-			System.out.println("ent");
 
 			mutexOut.acquire();
-			System.out.println("entééééééé "+ c.identification());
 
 			MessageX m = (MessageX) tampon[out];
-			System.out.println("out : "+out);
 			if(m.getNbExemplaire()==1){
 					Semaphore cc = new Semaphore(1);
 					cc.acquire();
@@ -90,15 +86,11 @@ public class ProdCons implements Tampon {
 					ProdSem.get(m.getP().identification()).release();
 					mutexLiberation.acquire();
 					for(Entry<Integer, Semaphore> entry : ConsSem.entrySet()) {
-						System.out.println(entry.getValue().drainPermits());
 						entry.getValue().release();
-						System.out.println(entry.getValue().drainPermits());
-						System.out.println("on passe "+entry.getKey());
+
 					}
 					mutexLiberation.release();
 					ConsSem.clear();
-					System.out.println("vide ? "+ConsSem.isEmpty());
-//				}
 				
 
 				

@@ -88,6 +88,7 @@ public class MessageX implements Message{
 	}
 	
 	public String toString(){ 
+
 		return "id : " + this.numero_message + " msg : " + message;
 	}
 
