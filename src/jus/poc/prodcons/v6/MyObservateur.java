@@ -94,7 +94,6 @@ public class MyObservateur{
 				System.out.println("Le message à bien été retiré du buffer.");
 			} else {
 				System.out.println(this.messagesTampon.toString());
-				System.out.println("mess retiré de la file ="+dernierMessage+" retiré = "+messX.num_message);
 				throw new ControlException(this.getClass(),"Les messages n'ont pas été retirés dans le bon ordre.");
 			}
 		}
