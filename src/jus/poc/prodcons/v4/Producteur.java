@@ -14,12 +14,21 @@ public class Producteur extends Acteur implements _Producteur{
 	private int NbMessageAProduire;
 	private Observateur observateur;
 	private int NbExemplaire;
-	
+	 
+	/**
+	 * 
+	 * @param observateur
+	 * @param Buffer
+	 * @param moyenneTempsDeTraitement
+	 * @param deviationTempsDeTraitement
+	 * @param nombreMoyenDeProduction
+	 * @param deviationNombreMoyenDeProduction
+	 * @param NbExemplaire
+	 * @throws ControlException
+	 */
 	protected Producteur(Observateur observateur,ProdCons Buffer, int moyenneTempsDeTraitement,
 			int deviationTempsDeTraitement, int nombreMoyenDeProduction, int deviationNombreMoyenDeProduction,int NbExemplaire) throws ControlException {
 		super(Acteur.typeProducteur, observateur, moyenneTempsDeTraitement, deviationTempsDeTraitement);
-//		this.ID_Producteur = nb_Prod;
-//		nb_Prod ++;
 		this.Buff=Buffer;
 		NbMessageAProduire = Aleatoire.valeur(nombreMoyenDeProduction,deviationNombreMoyenDeProduction);
 		TempsProduction= new Aleatoire(moyenneTempsDeTraitement, deviationTempsDeTraitement);
@@ -29,15 +38,24 @@ public class Producteur extends Acteur implements _Producteur{
 		System.out.println("Producteur "+identification()+" vient d'etre crée");
 	}
 	
+	/**
+	 * 
+	 * @return Retourne l'observateur du Producteur.
+	 */
 	public Observateur getObservateur (){
 		return this.observateur;
 	}
 
 	@Override
+	/**
+	 * @return Retourne le nombre de message que doit produire le Producteur.
+	 */
 	public int nombreDeMessages() {
 		return NbMessageAProduire;
 	}
-	
+	/**
+	 * <p> Methode run du Producteur. </p>
+	 */
 	public void run()
 	{	
 	int tpsprod=0;
@@ -94,7 +112,6 @@ public class Producteur extends Acteur implements _Producteur{
 			yield();
 			System.out.println("COMMUTATION");
 		}
-		//System.out.println(toString()+" a fini sa production XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
 	
 	}
 	
@@ -103,6 +120,10 @@ public class Producteur extends Acteur implements _Producteur{
 
 	}
 
+	/**
+	 * 
+	 * @return Retourne le nombre d'exemplaire de message par le producteur.
+	 */
 	public int getNbExemplaire() {
 		return this.NbExemplaire;
 	}

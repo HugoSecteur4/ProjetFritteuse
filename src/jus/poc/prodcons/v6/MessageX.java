@@ -8,7 +8,11 @@ public class MessageX implements Message {
 	private Producteur p;
 	private String message;
 	
-	
+	/**
+	 * 
+	 * @param message
+	 * @param p
+	 */
 	public MessageX(String message, Producteur p) {
 		super();
 		this.message = message;
@@ -17,39 +21,70 @@ public class MessageX implements Message {
 		
 		this.p = p;
 		
-		//num_message = num_message +1;
 
 	}
 	
+	/**
+	 * 
+	 * @return Retourne le numero du message.
+	 */
 	public int getNumero_message() {
 		return this.numero_message;
 	}
 
+	
+	/**
+	 * 
+	 * @param numero_message
+	 * <p> Setter du numero de message. </p>
+	 */
 	public void setNumero_message(int numero_message) {
 		this.numero_message = numero_message;
 	}
 
+	/**
+	 * 
+	 * @return Retourne le producteur du message.
+	 */
 	public Producteur getP() {
 		return p;
 	}
 
+	/**
+	 * 
+	 * @param p
+	 * <p> Setter du producteur du message. </p>
+	 */
 	public void setP(Producteur p) {
 		this.p = p;
 	}
 
+	/**
+	 * 
+	 * @return Retourne le message.
+	 */
 	public String getMessage() {
 		return message;
 	}
 
+	/**
+	 * 
+	 * @param message
+	 * <p> Setter du message. </p>
+	 */
 	public void setMessage(String message) {
 		this.message = message;
 	}
 	
 	public String toString(){ 
-		//return "Message " + numero_message + " du producteur " + p.identification() + " : " + message;
 		return "id : " + this.numero_message + " msg : " + message;
 	}
 	
+	/**
+	 * 
+	 * @param m
+	 * @return Retourne un boolean d'égalité avec le message donné en paramètre.
+	 */
 	public boolean equals(MessageX m) {
 		return (this.getNumero_message() == m.getNumero_message());
 	}

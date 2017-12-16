@@ -63,16 +63,13 @@ public class ProdCons implements Tampon {
 			System.out.println();
 		    Consommateur cs =(Consommateur) c;
 		    cs.getObservateur().retraitMessage(c,m);
-//			mutexOut.signal();
 			notFull.signal();
-//		    mutexOut.await();
 			return m;
 
 	    }finally{
 			lock.unlock();
 
 	    }
-//	    notEmpty.await();
 
 
 
@@ -84,7 +81,6 @@ public class ProdCons implements Tampon {
 		try{
 			while(this.nplein == this.taille_tampon)
 			notFull.await();
-//			mutexIn.await();
 			System.out.println("+++++++++++++++++++++++++++Dépose du message : " + msg.toString());
 			System.out.println();
 			tampon[in] = msg;
@@ -93,7 +89,6 @@ public class ProdCons implements Tampon {
 			this.nb_message_tampon = this.nb_message_tampon + 1;
 		    Producteur pr =(Producteur) p;
 		    pr.getObservateur().depotMessage(p, msg);
-//			mutexIn.signal();
 			notEmpty.signal();
 		}finally{
 			lock.unlock();

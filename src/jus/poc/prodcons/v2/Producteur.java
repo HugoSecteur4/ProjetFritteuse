@@ -16,8 +16,6 @@ public class Producteur extends Acteur implements _Producteur{
 	protected Producteur(Observateur observateur,ProdCons Buffer, int moyenneTempsDeTraitement,
 			int deviationTempsDeTraitement, int nombreMoyenDeProduction, int deviationNombreMoyenDeProduction) throws ControlException {
 		super(Acteur.typeProducteur, observateur, moyenneTempsDeTraitement, deviationTempsDeTraitement);
-//		this.ID_Producteur = nb_Prod;
-//		nb_Prod ++;
 		this.Buff=Buffer;
 		NbMessageAProduire = Aleatoire.valeur(nombreMoyenDeProduction,deviationNombreMoyenDeProduction);
 		TempsProduction= new Aleatoire(moyenneTempsDeTraitement, deviationTempsDeTraitement);
@@ -84,7 +82,6 @@ public class Producteur extends Acteur implements _Producteur{
 			yield();
 			System.out.println("COMMUTATION");
 		}
-		//System.out.println(toString()+" a fini sa production XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
 	
 	}
 	

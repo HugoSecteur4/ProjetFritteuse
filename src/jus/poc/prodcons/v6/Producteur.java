@@ -15,6 +15,17 @@ public class Producteur extends Acteur implements _Producteur{
 	private Observateur observateur;
 	private MyObservateur MyObsProd;
 	
+	/**
+	 * 
+	 * @param observateur
+	 * @param MyObs
+	 * @param Buffer
+	 * @param moyenneTempsDeTraitement
+	 * @param deviationTempsDeTraitement
+	 * @param nombreMoyenDeProduction
+	 * @param deviationNombreMoyenDeProduction
+	 * @throws ControlException
+	 */
 	protected Producteur(Observateur observateur, MyObservateur MyObs, ProdCons Buffer, int moyenneTempsDeTraitement,
 			int deviationTempsDeTraitement, int nombreMoyenDeProduction, int deviationNombreMoyenDeProduction) throws ControlException {
 		super(Acteur.typeProducteur, observateur, moyenneTempsDeTraitement, deviationTempsDeTraitement);
@@ -29,15 +40,25 @@ public class Producteur extends Acteur implements _Producteur{
 		System.out.println("Producteur "+identification()+" vient d'etre crée");
 	}
 	
+	/**
+	 * 
+	 * @return Retourne l'observateur du Producteur.
+	 */
 	public Observateur getObservateur (){
 		return this.observateur;
 	}
 
 	@Override
+	/**
+	 * @return Retourne le nombre de message que doit produire le Producteur.
+	 */
 	public int nombreDeMessages() {
 		return NbMessageAProduire;
 	}
 	
+	/**
+	 * <p> Methode run du Producteur. </p>
+	 */
 	public void run()
 	{	
 	int tpsprod=0;
@@ -95,7 +116,6 @@ public class Producteur extends Acteur implements _Producteur{
 			yield();
 			System.out.println("COMMUTATION");
 		}
-		//System.out.println(toString()+" a fini sa production XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
 	
 	}
 	
@@ -104,10 +124,20 @@ public class Producteur extends Acteur implements _Producteur{
 
 	}
 
+	 /**
+	 * 
+	 * @return Retourne le MyObservateur du Producteur.
+	 */
 	public MyObservateur getMyObsProd() {
 		return MyObsProd;
 	}
 
+	/**
+	 * 
+	 * @param myObsCons
+	 * 
+	 * <p>Setter de MyObservateur pour Producteur.</p>
+	 */
 	public void setMyObsProd(MyObservateur myObsProd) {
 		MyObsProd = myObsProd;
 	}

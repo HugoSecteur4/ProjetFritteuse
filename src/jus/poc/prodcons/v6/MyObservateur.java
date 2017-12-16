@@ -10,6 +10,13 @@ import jus.poc.prodcons._Producteur;
 public class MyObservateur{
 	private ConcurrentLinkedQueue<Integer> messagesTampon = new ConcurrentLinkedQueue<>();
 	
+	/**
+	 * 
+	 * @param nbProducteurs
+	 * @param nbConsommateurs
+	 * @param nbBuffers
+	 * @throws ControlException
+	 */
 	public void init(int nbProducteurs, int nbConsommateurs, int nbBuffers) throws ControlException{
 		
 		if (nbProducteurs <= 0) {
@@ -26,6 +33,11 @@ public class MyObservateur{
 		}
 	}
 	
+	/**
+	 * 
+	 * @param P
+	 * @throws ControlException
+	 */
 	public void newProducteur(_Producteur P) throws ControlException{
 		if (P==null) {
 			throw new ControlException(this.getClass(),"Vous avez utilisé un Producteur qui avait pour valeur null. PAS BIEN");
@@ -34,7 +46,11 @@ public class MyObservateur{
 		}
 	}
 	
-	
+	/**
+	 * 
+	 * @param C
+	 * @throws ControlException
+	 */
 	public void newConsommateur(_Consommateur C) throws ControlException{
 		if (C==null) {
 			throw new ControlException(this.getClass(),"Vous avez utilisé un Consommateur qui avait pour valeur null. PAS BIEN");
@@ -43,6 +59,13 @@ public class MyObservateur{
 		}
 	}
 	
+	/**
+	 * 
+	 * @param P
+	 * @param M
+	 * @param T
+	 * @throws ControlException
+	 */
 	public void productionMessage(_Producteur P, Message M, int T) throws ControlException{
 		if (P==null) {
 			throw new ControlException(this.getClass(),"Vous avez utilisé un Producteur qui avait pour valeur null. PAS BIEN");
@@ -55,6 +78,13 @@ public class MyObservateur{
 		}
 	}
 	
+	/**
+	 * 
+	 * @param C
+	 * @param M
+	 * @param T
+	 * @throws ControlException
+	 */
 	public void consommationMessage(_Consommateur C, Message M, int T) throws ControlException{
 		if (C==null) {
 			throw new ControlException(this.getClass(),"Vous avez utilisé un Consommateur qui avait pour valeur null. PAS BIEN");
@@ -67,6 +97,12 @@ public class MyObservateur{
 		}
 	}
 	
+	/**
+	 * 
+	 * @param P
+	 * @param M
+	 * @throws ControlException
+	 */
 	public void depotMessage(_Producteur P, Message M) throws ControlException{
 		if (P==null) {
 			throw new ControlException(this.getClass(),"Vous avez utilisé un Producteur qui avait pour valeur null. PAS BIEN");
@@ -79,6 +115,12 @@ public class MyObservateur{
 		}
 	}
 	
+	/**
+	 * 
+	 * @param C
+	 * @param M
+	 * @throws ControlException
+	 */
 	public void retraitMessage(_Consommateur C, Message M) throws ControlException{
 		if (C==null) {
 			throw new ControlException(this.getClass(),"Vous avez utilisé un Consommateur qui avait pour valeur null. PAS BIEN");
@@ -100,6 +142,12 @@ public class MyObservateur{
 		}
 	}
 	
+	/**
+	 * 
+	 * @param nbproduits
+	 * @param nbconsumes
+	 * @throws ControlException
+	 */
 	public void nbMsgProduits_eg_nbMsgConsumes(int nbproduits, int nbconsumes) throws ControlException{
 		if (nbproduits < nbconsumes) {
 			throw new ControlException(this.getClass(),"Vous avez consommés plus que vous avez produits -> PROBLEME ");

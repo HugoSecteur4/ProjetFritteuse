@@ -23,133 +23,211 @@ public class TestProdCons extends Simulateur{
 	private int deviationNombreMoyenDeProduction = 0;
 	private int nombreMoyenNbExemplaire = 0;
 	private int deviationNombreMoyenNbExemplaire = 0;
-	
+	/**
+	 * 
+	 * @return Retourne le nombre de Producteur.
+	 */
 	public int getNbProd() {
 		return nbProd;
 	}
 
 
-
+	/**
+	 * 
+	 * @return Retourne le nombre de Consommateur.
+	 */
 	public int getNbCons() {
 		return nbCons;
 	}
 
 
-
+	/**
+	 * 
+	 * @param nbCons
+	 * <p> Setter du nombre de Consommateur. 
+	 */
 	public void setNbCons(int nbCons) {
 		this.nbCons = nbCons;
 	}
 
 
-
+	/**
+	 * 
+	 * @return Retourne la taille du tampon de message.
+	 */
 	public int getNbBuffer() {
 		return nbBuffer;
 	}
 
 
-
+	/**
+	 * 
+	 * @param nbBuffer
+	 * <p> Setter de la taille du Buffer. </p>
+	 */
 	public void setNbBuffer(int nbBuffer) {
 		this.nbBuffer = nbBuffer;
 	}
 
 
-
+	/**
+	 * 
+	 * @return Retourne le temps moyen de production d'un message.
+	 */
 	public int getTempsMoyenProduction() {
 		return tempsMoyenProduction;
 	}
 
 
-
+	/**
+	 * 
+	 * @param tempsMoyenProduction
+	 * <p> Setter du temps moyen de production. </p>
+	 */
 	public void setTempsMoyenProduction(int tempsMoyenProduction) {
 		this.tempsMoyenProduction = tempsMoyenProduction;
 	}
 
 
 
+	/**
+	 * 
+	 * @return Retourne la deviation du temps moyen de production.
+	 */
 	public int getDeviationTempsMoyenProduction() {
 		return deviationTempsMoyenProduction;
 	}
 
 
-
+	/**
+	 * 
+	 * @param deviationTempsMoyenProduction
+	 * <p> Setter de deviation du temps moyen de production. </p>
+	 */
 	public void setDeviationTempsMoyenProduction(int deviationTempsMoyenProduction) {
 		this.deviationTempsMoyenProduction = deviationTempsMoyenProduction;
 	}
 
 
-
+	/**
+	 * 
+	 * @return Retourne le temps moyen de consommation.
+	 */
 	public int getTempsMoyenConsommation() {
 		return tempsMoyenConsommation;
 	}
 
 
-
+	/**
+	 * 
+	 * @param tempsMoyenConsommation
+	 * <p> Setter du temps moyen de consommation. </p>
+	 */
 	public void setTempsMoyenConsommation(int tempsMoyenConsommation) {
 		this.tempsMoyenConsommation = tempsMoyenConsommation;
 	}
 
 
-
+	/**
+	 * 
+	 * @return Retourne la deviation du temps moyen de consommation.
+	 */
 	public int getDeviationTempsMoyenConsommation() {
 		return deviationTempsMoyenConsommation;
 	}
 
 
-
+	/**
+	 * 
+	 * @param deviationTempsMoyenConsommation
+	 * <p> Setter de deviation du temps moyen de consommation.
+	 */
 	public void setDeviationTempsMoyenConsommation(int deviationTempsMoyenConsommation) {
 		this.deviationTempsMoyenConsommation = deviationTempsMoyenConsommation;
 	}
 
 
-
+	/**
+	 * 
+	 * @return Retourne le nombre moyen de production.
+	 */
 	public int getNombreMoyenDeProduction() {
 		return nombreMoyenDeProduction;
 	}
 
 
-
+	/** 
+	 * 
+	 * @param nombreMoyenDeProduction
+	 * <p> Setter du nombre moyen de production.
+	 */
 	public void setNombreMoyenDeProduction(int nombreMoyenDeProduction) {
 		this.nombreMoyenDeProduction = nombreMoyenDeProduction;
 	}
 
 
-
+	/**
+	 * 
+	 * @return Retourne la deviation du nombre moyen de production.
+	 */
 	public int getDeviationNombreMoyenDeProduction() {
 		return deviationNombreMoyenDeProduction;
 	}
 
 
-
+	/**
+	 * 
+	 * @param deviationNombreMoyenDeProduction
+	 * <p> Setter de deviation du nombre moyen de production.
+	 */
 	public void setDeviationNombreMoyenDeProduction(int deviationNombreMoyenDeProduction) {
 		this.deviationNombreMoyenDeProduction = deviationNombreMoyenDeProduction;
 	}
 
 
-
+	/**
+	 * 
+	 * @return Retourne le nombre moyen d'exemplaire d'un message.
+	 */
 	public int getNombreMoyenNbExemplaire() {
 		return nombreMoyenNbExemplaire;
 	}
 
 
-
+	/**
+	 * 
+	 * @param nombreMoyenNbExemplaire
+	 * <p> Setter du nombre moyen d'exemplaire pour le message.
+	 */
 	public void setNombreMoyenNbExemplaire(int nombreMoyenNbExemplaire) {
 		this.nombreMoyenNbExemplaire = nombreMoyenNbExemplaire;
 	}
 
 
-
+	/**
+	 * 
+	 * @return Retourne la deviation du nombre moyen d'exemplaire. 
+	 */
 	public int getDeviationNombreMoyenNbExemplaire() {
 		return deviationNombreMoyenNbExemplaire;
 	}
 
 
-
+	/**
+	 * 
+	 * @param deviationNombreMoyenNbExemplaire
+	 * <p> Setter de deviation du nombre moyen d'exemplaire.</p>
+	 */
 	public void setDeviationNombreMoyenNbExemplaire(int deviationNombreMoyenNbExemplaire) {
 		this.deviationNombreMoyenNbExemplaire  = deviationNombreMoyenNbExemplaire;
 	}
 
 
-
+	/**
+	 * 
+	 * @param nbProd
+	 * <p> Setter du nombre de Producteur.
+	 */
 	public void setNbProd(int nbProd) {
 		this.nbProd = nbProd;
 	}
@@ -161,21 +239,6 @@ public class TestProdCons extends Simulateur{
 	* @param file the final name of the file containing the options.
 	*/
 	protected void init(String file) {
-	// retreave the parameters of the application
-	
-	/*final class Properties extends java.util.Properties {
-		Class<?> thisOne = getClass();
-	private static final long serialVersionUID = 1L;
-	public int get(String key){return Integer.parseInt(getProperty(key));}
-	public Properties(String file) {
-	try{
-	loadFromXML(ClassLoader.getSystemResourceAsStream(file));
-	}catch(Exception e){e.printStackTrace();}
-	}
-	}
-	Properties option = new Properties("jus/poc/prodcons/options/"+file);
-	// Integer.parseInt(option.getProperty("nbProd"));
-	*/
 		System.out.println("initialisation");
 		Properties properties = new Properties();
 		
@@ -205,7 +268,10 @@ public class TestProdCons extends Simulateur{
 		}
 	
 	}
-	
+	/**
+	 * 
+	 * @param observateur
+	 */
 	public TestProdCons(Observateur observateur) {
 		super(observateur);
 	}
@@ -256,6 +322,7 @@ public class TestProdCons extends Simulateur{
 		
 	}
 
+	
 	public static void main(String[] args){new TestProdCons(new Observateur()).start();}
 	
 }
