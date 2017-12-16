@@ -128,14 +128,10 @@ public class MyObservateur{
 			throw new ControlException(this.getClass(),"Vous avez utilisé un Message qui avait pour valeur null. PAS BIEN");
 		} else {
 			MessageX messX = (MessageX)M;
-			System.out.println(this.messagesTampon.toString());
 			int dernierMessage = this.messagesTampon.remove();
-			System.out.println(this.messagesTampon.toString());
-			System.out.println("dernier message : " + dernierMessage + " - Message get : " + messX.getNumero_message());
 			if (dernierMessage == messX.getNumero_message()) {
 				System.out.println("Le message à bien été retiré du buffer.");
 			} else {
-				System.out.println(this.messagesTampon.toString());
 				throw new ControlException(this.getClass(),"Les messages n'ont pas été retirés dans le bon ordre.");
 			}
 		}

@@ -80,7 +80,6 @@ public class Consommateur extends Acteur implements _Consommateur {
 				System.out.println("***************************Traitement du message par le consommateur : " +this.identification() +", message : " + m.toString());
 				System.out.println();
 				NbMessageConso++;
-				System.out.println("c "+this.identification()+"j'ai conso :"+NbMessageConso);
 				
 				
 				
