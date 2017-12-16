@@ -238,11 +238,12 @@ public class TestProdCons extends Simulateur{
 			MyObs.newConsommateur(consommateur[i]);
 		}
 		boolean bool=false;
-		int summessprod=0;
-		int summesscons=0;
+		int summessprod = 0;
+		int summesscons = 0;
 		while(bool==false){
 
-			
+			summessprod=0;
+			summesscons=0;
 			for (int i =0; i<nbProd;i++){
 				summessprod+=producteur[i].nombreDeMessages();
 			}

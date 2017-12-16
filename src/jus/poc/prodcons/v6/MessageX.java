@@ -2,7 +2,7 @@ package jus.poc.prodcons.v6;
 
 import jus.poc.prodcons.Message;
 
-public class MessageX implements Message{
+public class MessageX implements Message {
 	public static int num_message = 1;
 	private int numero_message;
 	private Producteur p;
@@ -48,6 +48,10 @@ public class MessageX implements Message{
 	public String toString(){ 
 		//return "Message " + numero_message + " du producteur " + p.identification() + " : " + message;
 		return "id : " + this.numero_message + " msg : " + message;
+	}
+	
+	public boolean equals(MessageX m) {
+		return (this.getNumero_message() == m.getNumero_message());
 	}
 
 
